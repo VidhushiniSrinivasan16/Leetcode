@@ -1,0 +1,10 @@
+  public static long maxSubArrayCont(long nums[])
+        {
+        long currentCount=nums[0];long maxCount=nums[0];
+        for(int i=1;i<nums.length;i++)
+            {
+            currentCount=Math.max(nums[i],currentCount+nums[i]);
+            maxCount=Math.max(currentCount,maxCount);
+        }
+        return maxCount;
+    }
