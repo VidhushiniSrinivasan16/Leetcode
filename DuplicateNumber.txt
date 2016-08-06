@@ -1,0 +1,15 @@
+public class Solution {
+    public int findDuplicate(int[] nums) {
+       int arr[]=new int[nums.length];int num=0;
+       for(int i=0;i<nums.length;i++)
+       {
+           arr[nums[i]]+=1;
+           if(arr[nums[i]]>1)
+           {
+               num=nums[i];
+               break;
+           }
+       }
+       return num; 
+    }
+}
