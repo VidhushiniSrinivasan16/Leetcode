@@ -1,0 +1,22 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+     List<Integer> preOrderLst=new ArrayList<Integer>();
+    public List<Integer> preorderTraversal(TreeNode root) {
+       
+        if(root!=null)
+        {
+        preOrderLst.add(root.val);
+        preorderTraversal(root.left);
+        preorderTraversal(root.right);
+        }
+        return preOrderLst;
+    }
+}
