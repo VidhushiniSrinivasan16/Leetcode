@@ -1,0 +1,18 @@
+public class Solution {
+    public int[] singleNumber(int[] nums) {
+        int a[]=new int[2];
+        int xor=nums[0];
+        int setbit=0;
+        for(int i=1;i<nums.length;i++)
+        xor^=nums[i];
+        setbit=xor & ~(xor-1);
+        for(int i=0;i<nums.length;i++)
+        {
+            if((nums[i] & setbit)>0)
+            a[0]^=nums[i];
+            else
+            a[1]^=nums[i];
+        }
+        return a;
+    }
+}
