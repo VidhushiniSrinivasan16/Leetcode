@@ -1,0 +1,29 @@
+public class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> mainLst=new ArrayList<List<Integer>>();
+        
+        if(numRows==0)
+        return mainLst;
+        for(int i=0;i<numRows;i++)
+        {
+            List<Integer> subLst=new ArrayList<Integer>();
+           for(int j=0;j<=i;j++)
+            {
+              if(j==0) 
+              subLst.add(1);
+              else if(j<i)
+              {
+                  int temp=mainLst.get(i-1).get(j-1)+mainLst.get(i-1).get(j);
+                  subLst.add(temp);
+                  
+              }else if(j==i)
+              {
+                  subLst.add(1);
+              }
+            }
+            
+            mainLst.add(subLst);
+        }
+        return mainLst;
+    }
+}
