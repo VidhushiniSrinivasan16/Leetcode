@@ -1,0 +1,13 @@
+public class Solution {
+    
+    public char findTheDifference(String s, String t) {
+        int c=0;
+        for(int i=0;i<t.length();i++)
+        {
+            if(i<s.length())
+            c=c^s.charAt(i);
+            c=c^t.charAt(i);
+        }
+       return (char)c; 
+    }
+}
