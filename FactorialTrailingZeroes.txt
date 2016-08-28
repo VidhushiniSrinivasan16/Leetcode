@@ -1,0 +1,17 @@
+public class Solution {
+    public int trailingZeroes(int n) {
+        if(n<0)
+        return -1;
+        if(n==0)
+        return 0;
+        int count=0;
+        int div=(int)Math.floor((double)n/5.0);
+        count=div;
+        for(int i=25;div>1;i=i*5)
+        {
+        div=(int)Math.floor((double)n/(double)i);
+        count+=div;
+        }
+        return count;
+    }
+}
