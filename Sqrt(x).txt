@@ -1,0 +1,18 @@
+public class Solution {
+    public int mySqrt(int x) {
+        int y=1;
+        if(x==0)
+        return 0;
+        if(x==Integer.MAX_VALUE)
+        y=0;
+      
+        int x1=x;
+        
+        while(x1-y>0)
+        {
+            x1=(x1+y)/2;
+            y=x/x1;
+        }
+        return x1;
+    }
+}
