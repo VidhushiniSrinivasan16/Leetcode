@@ -1,0 +1,32 @@
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+    List<List<Integer>> lst=new ArrayList<List<Integer>>();
+   if(rowIndex==0)
+   {
+       List<Integer> sub=new ArrayList<Integer>();
+       sub.add(1);
+       lst.add(sub);
+       return lst.get(0);
+   }
+    for(int i=0;i<=rowIndex;i++)
+    {
+        List<Integer> sub=new ArrayList<Integer>();
+        for(int j=0;j<=i;j++)
+        {
+            if(j==0)
+            sub.add(1);
+            else if(j<i)
+            {
+                int k=lst.get(i-1).get(j-1)+lst.get(i-1).get(j);
+                sub.add(k);
+            }else if(j==i)
+            {
+                sub.add(1);
+            }
+        }
+        lst.add(sub);
+        
+    }
+     return lst.get(rowIndex);
+    }
+}
