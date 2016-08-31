@@ -1,0 +1,31 @@
+public class Solution {
+    public String getHint(String secret, String guess) {
+        int bulls=0;
+        int cows=0;
+        int s=0,g=0;
+        int size=secret.length();
+        int[] nums=new int[10];
+        if(secret.isEmpty()==true || guess.isEmpty()==true)
+        return null;
+       for(int i=0;i<size;i++)
+       {
+           s=secret.charAt(i)-'0';
+           g=guess.charAt(i)-'0';
+           if(s==g)
+           {
+           bulls++;
+           }
+           else
+           {
+               if(nums[s]<0)
+               cows++;
+               nums[s]++;
+               if(nums[g]>0)
+               cows++;
+               nums[g]--;
+               
+           }
+       }
+    return new String(bulls+"A"+cows+"B");
+    }
+}
