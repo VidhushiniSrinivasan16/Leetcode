@@ -1,3 +1,6 @@
+//run time 12ms
+
+
 import java.math.BigInteger;
 public class Solution {
     public int myAtoi(String str) {
@@ -14,28 +17,23 @@ public class Solution {
        {
        pos=false;i++;
        }
-      long res=0;long val=0;
+       BigInteger res=new BigInteger("0");
      
        while(i<str.length() && str.charAt(i)>='0' && str.charAt(i)<='9')
        {
            
-           res=res*10+str.charAt(i)-'0';
-           if(pos==false)
-           {
-               val=-res;
-               if(val<Integer.MIN_VALUE)
-                 return Integer.MIN_VALUE;
-           }else{
-              val=res;
-              if(val>Integer.MAX_VALUE)
-                 return Integer.MAX_VALUE;  
-           }
+           res=res.multiply(BigInteger.valueOf(10)).add(BigInteger.valueOf(str.charAt(i)-'0'));
            //System.out.println(res);
            i++;
        }
-      if(pos==false)
-      res=-res;
-       return (int)res;
+       if(pos==false)
+       res=res.negate();
+       
+       if(res.compareTo(BigInteger.valueOf(Integer.MAX_VALUE))>0)
+       return Integer.MAX_VALUE;
+       if(res.compareTo(BigInteger.valueOf(Integer.MIN_VALUE))<0)
+       return Integer.MIN_VALUE;
+       return res.intValue();
        
     }
 }
