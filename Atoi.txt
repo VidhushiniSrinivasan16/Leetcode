@@ -1,0 +1,36 @@
+import java.math.BigInteger;
+public class Solution {
+    public int myAtoi(String str) {
+        str=str.trim();
+       if(str==null||str.length()<1)
+       return 0;
+       boolean pos=true;
+       int i=0;
+       if(str.charAt(0)=='+')
+       {
+       i++;
+       }
+       else if(str.charAt(0)=='-')
+       {
+       pos=false;i++;
+       }
+       BigInteger res=new BigInteger("0");
+     
+       while(i<str.length() && str.charAt(i)>='0' && str.charAt(i)<='9')
+       {
+           
+           res=res.multiply(BigInteger.valueOf(10)).add(BigInteger.valueOf(str.charAt(i)-'0'));
+           //System.out.println(res);
+           i++;
+       }
+       if(pos==false)
+       res=res.negate();
+       
+       if(res.compareTo(BigInteger.valueOf(Integer.MAX_VALUE))>0)
+       return Integer.MAX_VALUE;
+       if(res.compareTo(BigInteger.valueOf(Integer.MIN_VALUE))<0)
+       return Integer.MIN_VALUE;
+       return res.intValue();
+       
+    }
+}
