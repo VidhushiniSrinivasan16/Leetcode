@@ -1,0 +1,69 @@
+public class Solution {
+     private static final char left_circle='(';
+     private static final char left_flower='{';
+     private static final char left_sqr='[';
+     private static final char right_circle=')';
+     private static final char right_flower='}';
+     private static final char right_sqr=']';
+    public boolean isValid(String s) {
+       
+        if(s==null||s.length()==0)
+        return true;
+        if(s.length()==1)
+        return false;
+        
+       Stack<Character> st=new Stack<Character>();
+       for(int i=0;i<s.length();i++)
+       {
+           switch(s.charAt(i))
+           {
+               case left_circle:
+                   st.push(left_circle);
+                   break;
+               case left_flower:
+                   st.push(left_flower);
+                   break;
+               case left_sqr:
+                   st.push(left_sqr);
+                   break;
+               case right_circle:
+                   if(!st.isEmpty())
+                   {
+                   if(!(st.pop().equals(left_circle)))
+                   {
+                    return false;   
+                   }
+                   }else
+                   {
+                       return false;
+                   }
+                   break;
+               case right_flower:
+                   if(!st.isEmpty())
+                   {
+                   if(!(st.pop().equals(left_flower)))
+                   {
+                    return false;   
+                   }
+                   }else
+                   {
+                       return false;
+                   }
+                   break;
+               case right_sqr:
+                    if(!st.isEmpty())
+                   {
+                   if(!(st.pop().equals(left_sqr)))
+                   {
+                    return false;   
+                   }
+                   }else
+                   {
+                       return false;
+                   }
+                   break;
+           }
+       }
+       return st.isEmpty();
+    }
+}
