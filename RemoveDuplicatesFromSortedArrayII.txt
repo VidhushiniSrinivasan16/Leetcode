@@ -1,0 +1,29 @@
+import java.util.*;
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+       if(nums==null || nums.length==0)
+       return 0;
+       if(nums.length==1)
+       return 1;
+      int n=nums.length;
+      int j=1;int prev=nums[0];int count=1;
+     for(int i=1;i<n;i++)
+     {
+        if(prev==nums[i])
+        count++;
+        else
+        count=1;
+        if(count<=2)
+        {
+        nums[j]=nums[i];
+        j++;
+        }
+        
+       
+        prev=nums[i];
+     }
+      
+    
+      return j;
+    }
+}
