@@ -1,0 +1,15 @@
+public class Solution {
+    public int titleToNumber(String s) {
+        if(s==null ||s.length()==0)
+        return 0;
+        int result=0;
+        int t=0;
+        for(int i=s.length()-1;i>=0;i--)
+        {
+           char c=s.charAt(i) ;
+           result+=(int)Math.pow(26,t)*(c-'A'+1);
+           t++;
+        }
+      return result;  
+    }
+}
