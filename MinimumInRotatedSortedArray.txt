@@ -1,0 +1,30 @@
+public class Solution {
+    public int findMin(int[] nums) {
+        if(nums==null || nums.length==0)
+        return 0;
+        int n=nums.length;
+        int low=0;
+        int high=n-1;
+        if(high<low)
+        return nums[0];
+        if(high==low)
+        return nums[low];
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(mid<high && nums[mid+1]<nums[mid])
+            return nums[mid+1];
+            if(mid>low && nums[mid]<nums[mid-1])
+            return nums[mid];
+            if(nums[high]>nums[mid])
+            {
+            high=mid-1;
+            }else
+            {
+            low=mid+1;
+            }
+            
+        }
+        return nums[0];
+    }
+}
