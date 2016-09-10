@@ -1,0 +1,50 @@
+import java.util.*;
+class Pair
+{
+    int num;
+    int count;
+    public Pair(int n,int p)
+    {
+        num=n;
+        count=p;
+    }
+}
+public class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) {
+      List<Integer> result=new ArrayList<Integer>(); 
+      if(nums==null||nums.length==0||k==0)
+      return result;
+      Map<Integer,Integer> mp=new HashMap<Integer,Integer>();
+      int n=nums.length;
+      for(int i=0;i<n;i++)
+      {
+          if(mp.containsKey(nums[i]))
+          {
+              mp.put(nums[i],mp.get(nums[i])+1);
+          }else
+          {
+              mp.put(nums[i],1);
+          }
+      }
+      //min heap
+      PriorityQueue<Pair> queue=new PriorityQueue<Pair>(new Comparator<Pair>(){
+          public int compare(Pair p,Pair q)
+          {
+              return p.count-q.count;
+          }
+      });
+      
+      for(Map.Entry<Integer,Integer> entry:mp.entrySet())
+      {
+          Pair pair=new Pair(entry.getKey(),entry.getValue());
+          queue.offer(pair);
+          if(queue.size()>k)
+          queue.poll();
+      }
+      while(queue.size()>0)
+      result.add(queue.poll().num);
+      Collections.reverse(result);
+      return result;
+      
+    }
+}
