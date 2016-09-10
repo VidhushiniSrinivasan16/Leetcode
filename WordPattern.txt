@@ -1,0 +1,28 @@
+public class Solution {
+    public boolean wordPattern(String pattern, String str) {
+        LinkedHashMap<Character,String> lmp=new LinkedHashMap<Character,String>();
+        String[] s=str.split("\\s+");
+        if(pattern==null && str==null)
+        return true;
+        if((pattern==null && str!=null)||(str==null)&&(pattern!=null))
+        return false;
+        if(pattern.length()!=s.length)
+        return false;
+        for(int i=0;i<s.length;i++)
+        {
+           if(!lmp.containsKey(pattern.charAt(i)))
+           {
+           if(!lmp.containsValue(s[i]) )
+           lmp.put(pattern.charAt(i),s[i]);
+           else
+           return false;
+           }
+           else
+           {
+               if(!lmp.get(pattern.charAt(i)).equals(s[i]))
+               return false;
+           }
+        }
+        return true;
+    }
+}
