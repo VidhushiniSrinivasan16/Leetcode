@@ -1,0 +1,22 @@
+public class Solution {
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+        int n=nums.length;
+        if(n==0||nums==null||nums.length<2||k<0||t<0)
+        return false;
+        
+        TreeSet<Long> ts=new TreeSet<Long>();
+        for(int i=0;i<n;i++)
+        {
+               long cur=(long)nums[i];
+               long l=(long)cur-t;
+               long r=(long)cur+t+1;
+               SortedSet<Long> set=ts.subSet(l,r);
+               if(set.size()>0)
+               return true;
+               ts.add(cur);
+               if(i>=k)
+                 ts.remove((long)nums[i-k]);
+        }
+        return false;
+    }
+}
