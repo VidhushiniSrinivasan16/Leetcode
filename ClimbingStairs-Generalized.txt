@@ -1,0 +1,16 @@
+ ways(n, m) = ways(n-1, m) + ways(n-2, m) + ... ways(n-m, m) 
+
+public class Solution {
+    public int countWays(int n,int m)
+    {
+        if(n<=1)
+        return n;
+        int res=0;
+        for(int i=1;i<=m && i<=n;i++)
+        res+=countWays(n-i,m);
+        return res;
+    }
+    public int climbStairs(int n) {
+        return countWays(n+1,2);
+    }
+}
