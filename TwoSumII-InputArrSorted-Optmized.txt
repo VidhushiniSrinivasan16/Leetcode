@@ -1,0 +1,30 @@
+public class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        if(numbers==null|| numbers.length==0||numbers.length==1)            
+        return new int[0];
+        int n=numbers.length;
+        int[] res=new int[2];
+        int i=0;
+        int j=n-1;
+        while(i<j)
+        {
+            if(numbers[i]+numbers[j]>Integer.MAX_VALUE || numbers[i]+numbers[j]<Integer.MIN_VALUE)
+            break;
+            int sum=numbers[i]+numbers[j];
+            if(sum==target)
+            {
+                res[0]=i+1;
+                res[1]=j+1;
+                break;
+            }else if(sum<target)
+            {
+                i++;
+            }else if(sum>target)
+            {
+                j--;
+            }
+            
+        }
+        return res;
+    }
+}
