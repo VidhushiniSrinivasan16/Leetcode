@@ -1,0 +1,10 @@
+public class Solution {
+    public int rangeBitwiseAnd(int m, int n) {
+        int res=n;
+        for(int i=n-1;i>=m;i--)
+        {
+            res&=i;
+        }
+        return res;
+    }
+}
