@@ -1,0 +1,17 @@
+public class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int p=s.length();
+        int q=t.length();
+        
+        return isSubsequence(s.toCharArray(),t.toCharArray(),p,q);
+    }
+    public boolean isSubsequence(char[] s, char[] t,int p,int q){
+        if(p==0)
+        return true;
+        if(q==0)
+        return false;
+        if(s[p-1]==t[q-1])
+        return isSubsequence(s,t,p-1,q-1);
+        return isSubsequence(s,t,p,q-1);
+    }
+}

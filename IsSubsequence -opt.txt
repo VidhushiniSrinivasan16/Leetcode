@@ -1,0 +1,40 @@
+public class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int p=s.length();
+        int q=t.length();
+        if(p==0)
+        return true;
+        int prev_ind=-1;
+        for(int i=0;i<s.length();i++)
+        {
+            int ind=t.indexOf(s.charAt(i));
+            int k=t.length();
+            System.out.println(ind);
+            if(ind>=0)
+            {
+            if(ind<prev_ind &&ind!=0)
+            {
+            int lind=t.lastIndexOf(s.charAt(i));
+            if(lind>=0 && lind>prev_ind )
+            ind=lind;
+            else
+            return false;
+            }
+            if(ind!=0 && ind!=t.length())
+            t=t.substring(0,ind)+t.substring(ind+1,k);
+            else if(ind==0 && ind!=t.length())
+            t=t.substring(1,k);
+            else if(ind!=0 && ind==t.length())
+            t=t.substring(0,k-1);
+            
+            
+             prev_ind=ind;
+            }
+            else
+            return false;
+          
+        }
+        return true;
+    }
+    
+}
