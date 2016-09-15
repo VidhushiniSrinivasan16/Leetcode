@@ -1,0 +1,47 @@
+public class Solution {
+    public int maxRotateFunction(int[] A) {
+        int n=A.length;
+        if(A==null||n==0||n==1)
+        return 0;
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++)
+        {
+           int val=RotateRight(A,i) ;
+           if(val>max)
+           max=val;
+        }
+        return max;
+    }
+   public int RotateRight(int[] A,int i){
+       int sum=0;
+       int n=A.length;
+       if(i==0)
+       {
+           for(int j=0;j<A.length;j++)
+           sum+=A[j]*j;
+       }else
+       {
+           reverseArr(A,0,n-2);
+           reverseArr(A,0,n-1);
+           for(int j=0;j<A.length;j++)
+           {
+           //System.out.format("%d ",A[j]);
+           sum+=A[j]*j;
+           }
+          // System.out.println("\n");
+       }
+       return sum;
+   } 
+   public void reverseArr(int[] arr,int s,int e)
+   {
+       int tmp=0;
+       while(s<e)
+       {
+           tmp=arr[s];
+           arr[s]=arr[e];
+           arr[e]=tmp;
+           s++;
+           e--;
+       }
+   }
+}
