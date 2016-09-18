@@ -1,0 +1,20 @@
+//17ms
+public class Solution {
+    public int search(int[] nums, int target) {
+        if(nums==null||nums.length==0)
+        return -1;
+        int n=nums.length;
+        if(n==1)
+        {
+            if(nums[0]==target)
+            return 0;
+            else return -1;
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]==target)
+            return i;
+        }
+        return -1;
+    }
+}
