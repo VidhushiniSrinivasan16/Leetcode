@@ -1,0 +1,55 @@
+//o(n) solution
+
+public class Solution 
+{
+    
+public int findMaximumXOR(int[] nums) 
+{
+        
+int max=0,mask=0;
+        
+if(nums.length==1 || nums.length==0)
+        
+return 0;
+        
+for(int i=31;i>=0;i--)
+        
+{
+            
+mask=mask|(1<<i);
+            
+HashSet<Integer> hs=new HashSet<Integer>();
+            
+for(int n:nums)
+           
+{
+                
+hs.add(n & mask);
+            
+}
+            
+int temp=max|(1<<i);
+           
+ for(int n:hs)
+            
+{
+                
+if(hs.contains(temp ^ n))
+                
+{
+                    
+max=temp;
+                    
+break;
+                
+}
+            
+}
+        
+}
+        
+return max;
+    
+}
+
+}
