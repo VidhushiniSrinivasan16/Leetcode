@@ -1,0 +1,22 @@
+public class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int length = nums.length;
+        int index=0;int count =1;
+        for(int j=0;j<length;j++)
+        {
+            if(nums[j]==target){
+            index=j;    
+            return index;
+            }else if(target<nums[j] && count ==1)
+            {
+                index=j;
+                count++;
+            }else if(target > nums[j] && nums.length==j+1)
+            {
+                index=j+1;
+            }
+            
+        }
+       return index;
+    }
+}
