@@ -1,0 +1,56 @@
+1. BruteForce
+
+
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+     int n=s.trim().length();
+     int ans=0;
+     for(int i=0;i<n;i++)
+     for(int j=i;j<n;j++)
+     {
+         if(allUnique(s,i,j))
+         {
+             ans=Math.max(ans,j-i+1);
+         }
+         
+     }
+      return ans;  
+    }
+    public boolean allUnique(String s, int start,int end)
+    {
+        HashSet<Character> hs=new HashSet<Character>();
+        for(int i=start;i<=end;i++)
+        {
+            Character ch =s.charAt(i);
+            if(hs.contains(ch)) 
+            return false;
+            hs.add(ch);
+        }
+        return true;
+    }
+}
+
+2.Naive
+
+
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+     int n=s.trim().length();
+     HashSet<Character> hs=new HashSet<Character>();
+     int ans=0;int i=0;int j=0;
+     while(i<n && j<n)
+     {
+         if(!hs.contains(s.charAt(j)))
+         {
+         hs.add(s.charAt(j));
+         ans=Math.max(ans,j-i+1);
+         j=j+1;
+         }else{
+             hs.remove(s.charAt(i));
+             i++;
+         }
+     }
+      return ans;  
+    }
+    
+}
