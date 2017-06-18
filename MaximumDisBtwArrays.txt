@@ -1,0 +1,59 @@
+//TLE
+
+public class Solution {
+    public int maxDistance(int[][] arrays) {
+        if(arrays==null|| arrays.length==0)
+        return -1;
+        int absVal=Integer.MIN_VALUE;
+        for(int i=0;i<arrays.length-1;i++)
+        {
+            if(arrays[i].length!=0)
+            {
+                for(int j=i+1;j<arrays.length;j++)
+                {
+                    if(arrays[j].length!=0)
+                    {
+                    absVal=Math.max(absVal,Math.max(Math.abs(arrays[i][0]-arrays[j][arrays[j].length-1]),Math.abs(arrays[j][0]-arrays[i][arrays[i].length-1])));
+                    }
+                }
+            }
+        }
+        return absVal;
+    }
+}
+
+//accepted
+public class Solution {
+    public int maxDistance(int[][] arrays) {
+        if(arrays==null|| arrays.length==0)
+        return -1;
+        int max = Integer.MIN_VALUE;
+        int min=Integer.MAX_VALUE;
+        int idx=-1,next_min=Integer.MAX_VALUE;
+        int absVal=0;
+        for(int i=0;i<arrays.length;i++)
+        {
+            if(arrays[i].length!=0)
+            {
+                min=Math.min(min,arrays[i][0]);
+                if(min==arrays[i][0])
+                idx=i;
+            }
+        }
+        int next_max=arrays[idx][arrays[idx].length-1];
+        for(int j=0;j<arrays.length;j++)
+        {
+            if(arrays[j].length!=0)
+            {
+                if(j!=idx)
+                {
+                    max=Math.max(max,arrays[j][arrays[j].length-1]);
+                    next_min=Math.min(next_min,arrays[j][0]);
+                }
+            }
+        }
+       
+        absVal=Math.max(Math.abs(max-min),Math.abs(next_max-next_min));
+        return absVal;
+    }
+}
