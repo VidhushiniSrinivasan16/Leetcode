@@ -57,3 +57,32 @@ public class Solution {
         return absVal;
     }
 }
+
+
+
+//Easy Solution o(n)
+
+public class Solution {
+    public int maxDistance(List<List<Integer>> arrays) {
+        int n=arrays.size();
+        if(n<2)
+        {
+            return -1;
+        }
+        int max=Integer.MIN_VALUE;
+        int min=Integer.MAX_VALUE;
+        int maxDist = Integer.MIN_VALUE;
+        for(List<Integer> list:arrays)
+        {
+            if(list.size()!=0 && min!=Integer.MAX_VALUE && max!=Integer.MIN_VALUE)
+            {
+                maxDist=Math.max(maxDist,Math.abs(list.get(list.size()-1) - min));
+                maxDist=Math.max(maxDist,Math.abs(list.get(0)-max));
+              
+            }
+              max = Math.max(max,list.get(list.size()-1));
+              min=Math.min(min,list.get(0));
+        }
+        return maxDist;
+    }
+}
