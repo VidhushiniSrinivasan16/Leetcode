@@ -1,22 +1,42 @@
 public class Solution {
     public int searchInsert(int[] nums, int target) {
         int length = nums.length;
-        int index=0;int count =1;
-        for(int j=0;j<length;j++)
+        int j=0;
+        for(j=0;j<length;j++)
         {
             if(nums[j]==target){
-            index=j;    
-            return index;
-            }else if(target<nums[j] && count ==1)
-            {
-                index=j;
-                count++;
-            }else if(target > nums[j] && nums.length==j+1)
-            {
-                index=j+1;
+            return j;
+            }else if(nums[j]<target){
+             continue;   
+            }else{
+                break;
             }
             
         }
-       return index;
+       return j;
+    }
+}
+
+//binary search
+
+public class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int length = nums.length;
+        int i=0,j=length-1;
+        while(i<=j)
+        {
+            int mid=(i+j)/2;
+            if(nums[mid]==target)
+            {
+            return mid;
+            }
+            else if(target < nums[mid]){
+             j=mid-1;   
+            }else{
+                i=mid+1;
+            }
+        }
+        return i;
+       
     }
 }

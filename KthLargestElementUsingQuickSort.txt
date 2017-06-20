@@ -1,0 +1,35 @@
+import java.util.PriorityQueue;
+public class Solution {
+    public int findKthLargest(int[] nums, int k) {
+       if(nums==null||nums.length==0) 
+       return -1;
+    return getKth(nums.length-k,nums,0,nums.length-1);
+    }
+    
+    public int getKth(int kidx,int nums[],int low,int high)
+    {
+        int pivot=nums[high];
+        int i,j;
+        i=low-1;
+        for(j=low;j<high;j++)
+        {
+            if(nums[j]<=pivot)
+            {
+                i++;
+                int temp=nums[j];
+                nums[j]=nums[i];
+                nums[i]=temp;
+            }
+        }
+        int temp=nums[i+1];
+        nums[i+1]=nums[high];
+        nums[high]=temp;
+        
+        if(kidx==i+1)
+        return pivot;
+        else if(kidx< i+1)
+        return getKth(kidx,nums,low,i);
+        else
+        return getKth(kidx,nums,i+2,high);
+    }
+}
