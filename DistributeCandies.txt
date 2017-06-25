@@ -1,0 +1,20 @@
+public class Solution {
+    public int distributeCandies(int[] candies) {
+        if(candies==null && candies.length==0)
+        return 0;
+        Map<Integer,Integer> mp=new HashMap<Integer,Integer>();
+        for(int kind:candies){
+                mp.put(kind,mp.getOrDefault(kind,0)+1);
+        }
+        int n=candies.length/2;int k=0;
+        for(Map.Entry<Integer,Integer> key:mp.entrySet()){
+            if(n>0)
+            {
+                k++;
+            }
+            n--;
+        }
+        return k;
+        
+    }
+}
