@@ -2,6 +2,8 @@ public class Solution {
     public int distributeCandies(int[] candies) {
         if(candies==null && candies.length==0)
         return 0;
+        if(candies.length==2)
+        return 1;
         Map<Integer,Integer> mp=new HashMap<Integer,Integer>();
         for(int kind:candies){
                 mp.put(kind,mp.getOrDefault(kind,0)+1);
@@ -11,6 +13,8 @@ public class Solution {
             if(n>0)
             {
                 k++;
+            }else{
+                break;
             }
             n--;
         }
