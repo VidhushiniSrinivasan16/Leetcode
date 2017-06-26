@@ -1,0 +1,49 @@
+//each bit k*(n-k)
+  public int totalHammingDistance(int[] nums) {
+        if(nums==null||nums.length<2)
+        return 0;
+        int totalSum=0;
+        int n=nums.length;
+       
+     for(int j=0;j<32;j++)
+     {
+         int bitSetCount=0;
+         for(int i=0;i<n;i++)
+         bitSetCount+=(nums[i]>>j)&1;
+         totalSum+=bitSetCount*(n-bitSetCount);
+     }
+     return totalSum;
+    }
+}
+
+
+//TLE
+public class Solution {
+    public int totalHammingDistance(int[] nums) {
+        if(nums==null||nums.length<2)
+        return 0;
+        int totalSum=0;
+        int n=nums.length;
+       
+       for(int i=0;i<n-1;i++)
+       {
+           for(int j=i+1;j<n;j++){
+               totalSum+=calcHammingDist(nums[i],nums[j]);
+           }
+       }
+       return totalSum;
+        
+    }
+    public int calcHammingDist(int num1,int num2)
+    {
+        int n=num1 ^ num2;
+        int count=0;
+        while(n>0)
+        {
+            n=n&(n-1);
+            count++;
+        }
+        return count;
+    }
+}
+
