@@ -1,0 +1,27 @@
+public class Solution {
+    public String reverseWords(String s) {
+      if(s==null)
+      return s;
+      String[] str=s.split(" +");
+      StringBuilder sb=new StringBuilder();
+      for(String val:str)
+      {
+          sb.append(reverse(val)+" ");
+      }
+      return sb.toString().trim();
+    }
+    public String reverse(String str)
+    {
+        Stack<Character> st=new Stack<Character>();
+        for(int i=0;i<str.length();i++)
+        {
+            st.push(str.charAt(i));
+        }
+        StringBuilder sb1=new StringBuilder();
+        for(int i=0;i<str.length();i++)
+        {
+            sb1.append(st.pop());
+        }
+        return sb1.toString();
+    }
+}
