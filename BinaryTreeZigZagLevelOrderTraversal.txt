@@ -1,0 +1,52 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> result=new ArrayList<List<Integer>>();
+        
+        if(root==null)
+        return result;
+        
+        LinkedList<TreeNode> curr=new LinkedList<TreeNode>();
+        LinkedList<TreeNode> next=new LinkedList<TreeNode>();
+        
+        curr.offer(root);
+        int i=1;
+        List<Integer> lst=new ArrayList<Integer>();
+        while(!curr.isEmpty())
+        {
+            TreeNode head=curr.poll();
+            lst.add(head.val);
+            
+            if(head.left!=null)
+            {
+            next.offer(head.left);
+            }
+            if(head.right!=null)
+            {
+            next.offer(head.right);
+            }
+            if(curr.isEmpty())
+            {
+                curr=next;
+                next=new LinkedList<TreeNode>();
+                if((i&1)==0)
+                {
+                    Collections.reverse(lst);
+                }
+                result.add(lst);
+                lst=new ArrayList<Integer>();
+                i++;
+            }
+        }
+       
+        return result;
+    }
+}
