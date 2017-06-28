@@ -1,0 +1,20 @@
+public class Solution {
+    public int[] nextGreaterElement(int[] findNums, int[] nums) {
+        if(findNums==null || nums==null)
+        return new int[1];
+        Map<Integer,Integer> mp=new HashMap<Integer,Integer>();
+        Stack<Integer> st=new Stack<Integer>();
+        
+        for(int num:nums)
+        {
+            while(!st.isEmpty() && st.peek()<num)
+            mp.put(st.pop(),num);
+            st.push(num);
+        }
+        for(int i=0;i<findNums.length;i++)
+        {
+            findNums[i]=mp.getOrDefault(findNums[i],-1);
+        }
+        return findNums;
+    }
+}
