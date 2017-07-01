@@ -1,17 +1,40 @@
+//3ms
+
 public class Solution {
-    List<List<Integer>> finalLst=new ArrayList<List<Integer>>();
     public List<List<Integer>> subsets(int[] nums) {
-       int n=nums.length;
-       for(int i=0;i<(1<<n);i++)
-       {
-           List<Integer> lst=new ArrayList<Integer>();
-           for(int j=0;j<n;j++)
-           {
-               if((i & (1<<j))>0)
-               lst.add(nums[j]);
-           }
-           finalLst.add(lst);
-       }
-       return finalLst;
+        List<List<Integer>> lst=new ArrayList<List<Integer>>();
+        Arrays.sort(nums);
+        backtrack(lst,new ArrayList<Integer>(),nums,0);
+        return lst;
+    }
+    public void backtrack(List<List<Integer>> lst,List<Integer> tempLst,int[]nums,int start)
+    {
+        lst.add(new ArrayList<>(tempLst));
+        for(int i=start;i<nums.length;i++)
+        {
+            tempLst.add(nums[i]);
+            backtrack(lst,tempLst,nums,i+1);
+            tempLst.remove(tempLst.size()-1);
+        }
+    }
+}
+
+//1 ms
+
+public class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> lst=new ArrayList<List<Integer>>();
+        int counter=0,len=(int)Math.pow(2,nums.length);
+        for(counter=0;counter<len;counter++)
+        {
+            List<Integer> tempLst=new ArrayList<Integer>();
+            for(int j=0;j<nums.length;j++)
+            {
+                if((counter & (1<<j))!=0)
+                    tempLst.add(nums[j]);
+            }
+            lst.add(tempLst);
+        }
+        return lst;
     }
 }
