@@ -1,0 +1,21 @@
+public class Solution {
+    int result=0;
+    public int findTargetSumWays(int[] nums, int S) {
+        if(nums==null||nums.length==0)
+            return result;
+        backtrack(nums,S,0,0L);  
+        return result;
+    }
+    
+    public void backtrack(int[] nums,int target,int pos,long val)
+    {
+        if(pos==nums.length)
+        {
+            if(target==val)
+                result++;
+            return;
+        }
+        backtrack(nums,target,pos+1,val+nums[pos]);
+        backtrack(nums,target,pos+1,val-nums[pos]);
+    }
+}
