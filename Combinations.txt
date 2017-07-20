@@ -1,0 +1,20 @@
+public class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> lis=new ArrayList<List<Integer>>();
+        backtrack(lis,new ArrayList<Integer>(),n,k,1);
+        return lis;
+    }
+    public void backtrack(List<List<Integer>> lis,List<Integer> tempLst,int n,int k,int start)
+    {
+        if(tempLst.size()==k)
+            lis.add(new ArrayList(tempLst));
+        else{
+            for(int i=start;i<=n;i++)
+            {
+                tempLst.add(i);
+                backtrack(lis,tempLst,n,k,i+1);
+                tempLst.remove(tempLst.size()-1);
+            }
+        }
+    }
+}
