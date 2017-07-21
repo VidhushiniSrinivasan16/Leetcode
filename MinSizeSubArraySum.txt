@@ -1,0 +1,59 @@
+
+//TLE
+public class Solution {
+    public int minSubArrayLen(int s, int[] nums) {
+        if(nums==null||nums.length<1)
+            return 0;
+        int n=nums.length;
+        boolean flag=false;
+        int min=n+1;
+        for(int start=0;start<n;start++)
+        {
+            int cur_sum=nums[start];
+            if(cur_sum >= s)
+                return 1;
+            for(int end=start+1;end<n;end++)
+            {
+                cur_sum+=nums[end];
+                if(cur_sum>=s && (end-start+1)<min)
+                {
+                    min=end-start+1;
+                    flag=true;
+                }
+            }
+        }
+        if(flag)
+            return min;
+        return 0;
+    }
+}
+
+
+//2ms 15 tc's
+public class Solution {
+    public int minSubArrayLen(int s, int[] nums) {
+        if(nums==null||nums.length<1)
+            return 0;
+        int n=nums.length;
+        boolean flag=false;
+        int min=n+1;
+        int start=0,end=0,cur_sum=0;
+        while(end<n)
+        {
+            while(cur_sum < s && end<n)
+                cur_sum+=nums[end++];
+            while(cur_sum>=s && start<n)
+            {
+                if(end-start<min)
+                {
+                    min=end-start;
+                    flag=true;
+                }
+                cur_sum-=nums[start++];
+            }
+        }
+        if(flag)
+            return min;
+        return 0;
+    }
+}

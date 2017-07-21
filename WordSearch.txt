@@ -1,0 +1,30 @@
+public class Solution {
+    public boolean exist(char[][] board, String word) {
+        char[] word_arr=word.toCharArray();
+        for(int x=0;x<board.length;x++)
+        {
+            for(int y=0;y<board[x].length;y++)
+            {
+                if(word_exists(board,x,y,word_arr,0))
+                    return true;
+            }
+        }
+        return false;
+    }
+    public boolean word_exists(char[][] board,int x,int y,char[] word_arr,int len)
+    {
+        if(len==word_arr.length)
+            return true;
+        if(x<0||y<0||x==board.length||y==board[x].length)
+            return false;
+        if(board[x][y]!=word_arr[len])
+            return false;
+        board[x][y]^=256;
+        boolean exists=word_exists(board,x+1,y,word_arr,len+1)
+                    ||word_exists(board,x-1,y,word_arr,len+1)
+                    ||word_exists(board,x,y+1,word_arr,len+1)
+                    ||word_exists(board,x,y-1,word_arr,len+1);
+        board[x][y]^=256;
+        return exists;
+    }
+}
