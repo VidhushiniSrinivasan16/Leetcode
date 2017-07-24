@@ -1,0 +1,66 @@
+
+//3 Sum TLE
+public class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> lis=new ArrayList<List<Integer>>();
+        Arrays.sort(nums);
+        backtrack(lis,new ArrayList<Integer>(),nums,0,0);
+        return lis;
+    }
+    public void backtrack(List<List<Integer>> lis,List<Integer> tempLst,int[] nums,int target,int start)
+    {
+        if(target==0 && tempLst.size()==3 )
+        {
+            lis.add(new ArrayList<>(tempLst));
+        }else{
+            for(int i=start;i<nums.length;i++)
+            {
+                if(i>start && nums[i]==nums[i-1]) continue;
+                tempLst.add(nums[i]);
+                backtrack(lis,tempLst,nums,target-nums[i],i+1);
+                tempLst.remove(tempLst.size()-1);
+            }
+        }
+    }
+}
+
+
+public class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> lis=new ArrayList<List<Integer>>();
+        int n=nums.length;
+        if(n<3)
+            return lis;
+        Arrays.sort(nums);
+        for(int i=0;i<n-2;i++)
+        {
+            if(i==0 || nums[i] > nums[i-1]){
+            int j=i+1;
+            int k=n-1;
+            while(j<k)
+            {
+            if(nums[i]+nums[j]+nums[k]==0)
+            {
+                List<Integer> new_lis=new ArrayList<Integer>();
+                new_lis.add(nums[i]);
+                new_lis.add(nums[j]);
+                new_lis.add(nums[k]);
+                lis.add(new_lis);
+                j++;
+                k--;
+                while(j<k && nums[j]==nums[j-1])
+                    j++;
+                while(j<k && nums[k]==nums[k+1])
+                    k--;
+            }else if(nums[i]+nums[j]+nums[k]<0)
+                j++;
+            else
+                k--;
+           }
+        }
+    }
+        return lis;
+    }
+    
+    
+}

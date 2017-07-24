@@ -1,0 +1,36 @@
+public class Solution {
+    public String replaceWords(List<String> dict, String sentence) {
+        Set<String> hs=new HashSet<>(dict);
+        StringBuilder sb=new StringBuilder();
+        StringBuilder curr=new StringBuilder();
+        boolean root=false;
+       for(int i=0;i<sentence.length();i++)
+       {
+           char c=sentence.charAt(i);
+           if(c==' ')
+           {
+               if(!root && curr.length()>0)
+               {
+               sb.append(curr);
+               curr=new StringBuilder();
+               }
+               sb.append(c);
+               root=false;
+           }else if(!root){
+               curr.append(c);
+               String str=curr.toString();
+               if(hs.contains(str))
+               {
+                   sb.append(str);
+                   root=true;
+                   curr=new StringBuilder();
+               }
+           }
+       }
+        if(!root && curr.length()>0)
+        {
+            sb.append(curr);
+        }
+        return sb.toString();
+    }
+}
