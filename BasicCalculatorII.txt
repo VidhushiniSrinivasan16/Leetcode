@@ -1,0 +1,57 @@
+public class Solution {
+    public int calculate(String s) {
+        char[] token=s.toCharArray();
+        Stack<Integer> val=new Stack<Integer>();
+        Stack<Character> ops=new Stack<Character>();
+        for(int i=0;i<token.length;i++)
+        {
+            if(token[i]==' ')
+                continue;
+            if(token[i]>='0' && token[i]<='9')
+            {
+                StringBuilder sb=new StringBuilder();
+                sb.append(token[i]);
+                while(i+1<token.length && token[i+1]>='0' && token[i+1]<='9')
+                {
+                    sb.append(token[i+1]);
+                    i++;
+                }
+                val.push(Integer.parseInt(sb.toString()));
+            }else if(token[i]=='+' ||token[i]=='-'||token[i]=='*'||token[i]=='/') {
+              while(!ops.isEmpty() && hasPrecedence(token[i],ops.peek()))
+                  val.push(compute(ops.pop(),val.pop(),val.pop()));
+                ops.push(token[i]);
+            }
+        }
+        while(!ops.isEmpty())
+             val.push(compute(ops.pop(),val.pop(),val.pop()));
+        
+        return val.pop();
+    }
+    
+    public int compute(char op,int b,int a)
+    {
+        switch(op)
+        {
+            case '+':
+                return a+b;
+            case '-':
+                return a-b;
+            case '*':
+                return a*b;
+            case '/':
+                if(b==0)
+                    throw new ArithmeticException("Divide by Zero Error");
+                return a/b;
+        }
+        return 0;
+    }
+    
+    public boolean hasPrecedence(char op1,char op2)
+    {
+        if((op1=='*'||op1=='/') && (op2=='+'||op2=='-'))
+            return false;
+        else
+            return true;
+    }
+}
