@@ -1,0 +1,37 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+  
+    public int findBottomLeftValue(TreeNode root) {
+        Level lev=new Level();
+        lev.nodeVal=root.val;
+        traverse(root,false,lev,0);
+        return lev.nodeVal;
+    }
+    
+    public void traverse(TreeNode root,boolean isLeft,Level lev,int maxlev)
+    {
+        if(root==null)
+            return;
+        if(isLeft==true && root.left==null && root.right==null && lev.maxlevel<maxlev)
+        {
+            lev.maxlevel=maxlev;
+            lev.nodeVal=root.val;
+        }
+        traverse(root.left,true,lev,maxlev+1);
+        traverse(root.right,false,lev,maxlev+1);
+    }
+}
+
+class Level
+{
+    int maxlevel=0;
+    int nodeVal;
+}
