@@ -1,0 +1,53 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    Map<Integer,Integer> map=new HashMap<Integer,Integer>();
+    int count=0;
+    public int[] findMode(TreeNode root) {
+        if(root==null)
+            return new int[0];
+        postorder(root);
+        PriorityQueue<Map.Entry<Integer,Integer>> pq=new PriorityQueue<>(new 
+        Comparator<Map.Entry<Integer,Integer>>(){
+            @Override
+            public int compare(Map.Entry<Integer,Integer> a,Map.Entry<Integer,Integer> b)
+            {
+                return b.getValue()-a.getValue();
+            }
+        });
+       pq.addAll(map.entrySet());
+        System.out.println(count);
+       int[] res=new int[count];int prev=Integer.MIN_VALUE;int i=0;
+        for(i=0;i<count;i++)
+        {
+            if(!pq.isEmpty())
+            {
+            Map.Entry e=pq.poll();
+            if(prev>(int)e.getValue())
+                break;
+            res[i]=(int)e.getKey();
+            prev=(int)e.getValue();
+            }else{
+                break;
+            }
+        }
+        return Arrays.copyOf(res,i);
+    }
+    
+    public void postorder(TreeNode root)
+    {
+        if(root==null)
+            return;
+        postorder(root.left);
+        postorder(root.right);
+        map.put(root.val,map.getOrDefault(root.val,0)+1);
+        count++;
+    }
+}
