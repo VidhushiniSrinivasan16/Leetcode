@@ -1,0 +1,27 @@
+class Solution {
+    public boolean judgeCircle(String moves) {
+        if(moves==null)
+            return false;
+        int v=0,h=0;
+        for(int m:moves.toCharArray())
+        {
+            switch(m)
+            {
+                case 'U':
+                    v++;
+                    break;
+                case 'D':
+                    v--;
+                    break;
+                case 'L':
+                    h++;
+                    break;
+                case 'R':
+                    h--;
+                    break;
+                    
+            }
+        }
+        return v==0 && h==0;
+    }
+}
