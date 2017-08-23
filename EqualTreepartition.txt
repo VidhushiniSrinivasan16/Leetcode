@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean checkEqualTree(TreeNode root) {
+        if(root==null || root.left==null && root.right==null)
+            return false;
+        int total_sum=calcSum(root);
+        return calcSumRec(root,total_sum);
+    }
+    
+    public int calcSum(TreeNode node)
+    {
+        if(node==null)
+            return 0;
+        return calcSum(node.left)+calcSum(node.right)+node.val;
+    }
+    
+    public boolean calcSumRec(TreeNode node,int n)
+    {
+        if(node==null)
+            return false;
+        if(calcSum(node)==n-calcSum(node))
+            return true;
+        return calcSumRec(node.left,n)||calcSumRec(node.right,n);
+    }
+}

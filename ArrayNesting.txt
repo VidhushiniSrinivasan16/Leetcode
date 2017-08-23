@@ -1,0 +1,19 @@
+class Solution {
+    public int arrayNesting(int[] nums) {
+        if(nums==null||nums.length==0)
+            return 0;
+        int max_size=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            int size=0;
+            for(int k=i;nums[k]>=0;size++)
+            {
+                int numk=nums[k];
+                nums[k]=-1;
+                k=numk;
+            }
+            max_size=Math.max(max_size,size);
+        }
+        return max_size;
+    }
+}
