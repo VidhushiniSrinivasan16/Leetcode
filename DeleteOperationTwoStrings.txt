@@ -1,0 +1,47 @@
+//TLE
+class Solution {
+    public int minDistance(String word1, String word2) {
+       int lcs_len=lcs(word1.toCharArray(),word2.toCharArray(),word1.length(),word2.length());
+        return word1.length()-lcs_len+word2.length()-lcs_len;
+    }
+    
+    public int lcs(char[] X,char[] Y,int m,int n)
+    {
+        if(m==0||n==0)
+            return 0;
+        if(X[m-1]==Y[n-1])
+            return 1+lcs(X,Y,m-1,n-1);
+        return Math.max(lcs(X,Y,m-1,n),lcs(X,Y,m,n-1));
+    }
+    
+}
+
+
+//DP
+
+class Solution {
+    public int minDistance(String word1, String word2) {
+        int m=word1.length();
+        int n=word2.length();
+        int lcs_len=lcs(word1.toCharArray(),word2.toCharArray(),m,n);
+        return m-lcs_len+n-lcs_len;
+    }
+    public int lcs(char[] X,char[] Y,int m,int n)
+    {
+        int[][] dp=new int[m+1][n+1];
+        for(int i=0;i<=m;i++)
+        {
+            for(int j=0;j<=n;j++)
+            {
+                if(i==0||j==0)
+                    dp[i][j]=0;
+                else if(X[i-1]==Y[j-1])
+                    dp[i][j]=dp[i-1][j-1]+1;
+                else
+                    dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
+            }
+        }
+        return dp[m][n];
+    }
+}
+
