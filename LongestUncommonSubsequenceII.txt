@@ -1,0 +1,54 @@
+class Solution {
+    public int findLUSlength(String[] strs) {
+        if(strs==null||strs.length==0)
+            return -1;
+       Arrays.sort(strs,new Comparator<String>(){
+           @Override
+           public int compare(String a,String b){
+               return b.length()-a.length();
+           }
+       });
+        Set<String> dup=getDuplicates(strs);
+        for(int i=0;i<strs.length;i++)
+        {
+            if(!dup.contains(strs[i]))
+            {
+                if(i==0)
+                return strs[i].length();
+                for(int j=0;j<i;j++)
+                {
+                    if(isSubsequence(strs[j],strs[i]))break;
+                    if(j==i-1) return strs[i].length();
+                }
+            }
+        }
+        return -1;
+    }
+        
+        public boolean isSubsequence(String a,String b)
+        {
+            int i=0,j=0;
+            while(i<a.length() && j<b.length())
+            {
+                if(a.charAt(i)==b.charAt(j)) 
+                {
+                    j++;
+                }
+                i++;
+            }
+            return j==b.length();
+        }
+        
+        public Set<String> getDuplicates(String[] strs)
+        {
+           Set<String> set=new HashSet<String>(); 
+            Set<String> dup=new HashSet<String>();
+            for(int i=0;i<strs.length;i++)
+            {
+                if(set.contains(strs[i])) dup.add(strs[i]);
+                set.add(strs[i]);
+            }
+            return dup;
+        }
+    
+}
