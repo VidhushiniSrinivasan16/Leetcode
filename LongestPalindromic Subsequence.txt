@@ -1,0 +1,44 @@
+//Recursion - TLE
+
+class Solution {
+    public int longestPalindromeSubseq(String s) {
+        return longestPaliLen(s,0,s.length()-1);
+    } 
+    public int longestPaliLen(String s,int i,int j)
+    {
+        if(i==j)
+            return 1;
+        if(s.charAt(i)==s.charAt(j) && i+1==j)
+            return 2;
+        if(s.charAt(i)==s.charAt(j))
+            return longestPaliLen(s,i+1,j-1)+2;
+        return Math.max(longestPaliLen(s,i,j-1),longestPaliLen(s,i+1,j));
+    }
+}
+
+
+class Solution {
+    public int longestPalindromeSubseq(String s) {
+        int n=s.length();
+        if(s==null || n==0)
+            return 0;
+        int dp[][]=new int[n][n];
+        for(int i=0;i<n;i++)
+            dp[i][i]=1;
+        for(int k=2;k<=n;k++)
+        {
+            for(int i=0;i<n-k+1;i++)
+            {
+                int j=i+k-1;
+                if(s.charAt(i)==s.charAt(j) && k==2)
+                    dp[i][j]=2;
+                else if(s.charAt(i)==s.charAt(j))
+                    dp[i][j]=dp[i+1][j-1]+2;
+                else
+                    dp[i][j]=Math.max(dp[i][j-1],dp[i+1][j]);
+            }
+        }
+        return dp[0][n-1];
+    
+    }
+}
