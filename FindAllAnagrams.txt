@@ -1,0 +1,35 @@
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> res=new ArrayList<Integer>();
+        int m=s.length();int n=p.length();
+        if(s==null||p==null||m<n)
+            return res;
+        for(int i=0;i<m-n+1;i++)
+        {
+            String cur=s.substring(i,i+n);
+            if(isAnagram(cur,p)) res.add(i);
+        }
+        return res;
+    }
+    public boolean isAnagram(String a,String b)
+    {
+        int l=a.length();
+        int k=b.length();
+        if(a==null||b==null||l!=k)
+            return false;
+        int[] dict=new int[26];
+        for(int i=0;i<l;i++)
+        {
+            char ch=a.charAt(i);
+            dict[ch - 'a']++;
+        }
+        for(int j=0;j<k;j++)
+        {
+            char ch=b.charAt(j);
+            dict[ch - 'a']--;
+            if(dict[ch-'a']<0)
+                return false;
+        }
+        return true;
+    }
+}
