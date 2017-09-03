@@ -1,0 +1,42 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int findSecondMinimumValue(TreeNode root) {
+        PriorityQueue<TreeNode> pq=new PriorityQueue<TreeNode>(new Comparator<TreeNode>(){
+            @Override
+            public int compare(TreeNode a,TreeNode b)
+            {
+                return a.val-b.val;
+            }
+        });
+        traverseTree(pq,root);
+        int min=pq.poll().val;
+        while(!pq.isEmpty())
+        {
+            int second_min=pq.poll().val;
+            if(min!=second_min)
+            {
+                return second_min;
+            }else{
+                min=second_min;
+            }
+        }
+        return -1;
+    }
+    
+    public void traverseTree(PriorityQueue<TreeNode> pq,TreeNode root)
+    {
+        if(root==null)
+            return;
+        traverseTree(pq,root.left);
+        pq.offer(root);
+        traverseTree(pq,root.right);
+    }
+}

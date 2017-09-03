@@ -1,0 +1,25 @@
+class Solution {
+    public int maximumSwap(int num) {
+        char[] arr=Integer.toString(num).toCharArray();
+        int n=arr.length;
+        if(n<=1)
+            return num;
+        int max=num;
+        for(int i=0;i<n-1;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                swap(arr,i,j);
+                max=Math.max(max,Integer.parseInt(new String(arr)));
+                swap(arr,i,j);    
+            }
+        }
+        return max;
+    }
+    public void swap(char[] ch,int i,int j)
+    {
+        char temp=ch[i];
+        ch[i]=ch[j];
+        ch[j]=temp;
+    }
+}
