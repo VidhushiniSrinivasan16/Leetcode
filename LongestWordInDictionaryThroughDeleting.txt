@@ -1,0 +1,19 @@
+class Solution {
+    public String findLongestWord(String s, List<String> d) {
+        String longest="";
+        for(String dict: d)
+        {
+            int i=0;
+            for(char c: s.toCharArray())
+            {
+                if(i<dict.length() && c==dict.charAt(i)) i++;
+            }
+            if(i==dict.length() && dict.length()>=longest.length())
+            {
+                if(dict.length() > longest.length() || dict.compareTo(longest)<0)
+                    longest=dict;
+            }
+        }
+        return longest;
+    }
+}
