@@ -1,0 +1,38 @@
+public class Solution {
+    public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        List<int[]> res=new ArrayList<int[]>();
+        if(nums1==null||nums1.length==0||nums2==null||nums2.length==0||k<=0)
+            return res;
+        int m=nums1.length;
+        int n=nums2.length;
+        PriorityQueue<Pair> pq=new PriorityQueue<Pair>();
+        for(int i=0;i<n;i++)
+        {
+            pq.offer(new Pair(0,i,nums1[0]+nums2[i]));
+        }
+        for(int j=0;j<Math.min(k,m*n);j++)
+        {
+            Pair p=pq.poll();
+            res.add(new int[]{nums1[p.x],nums2[p.y]});
+            if(p.x==m-1) continue;
+            pq.offer(new Pair(p.x+1,p.y,nums1[p.x+1]+nums2[p.y]));
+        }
+        return res;
+    }
+}
+
+class Pair implements Comparable<Pair>
+{
+int x,y,val;
+public Pair(int x,int y,int val)
+{
+this.x=x;
+this.y=y;
+this.val=val;
+}
+@Override
+public int compareTo(Pair that)
+{
+return this.val - that.val;
+}
+}
