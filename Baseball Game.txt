@@ -1,0 +1,23 @@
+class Solution {
+    public int calPoints(String[] ops) {
+        int tot_points=0;
+        LinkedList<Integer> lis=new LinkedList<Integer>();
+        for(String st:ops)
+        {
+            if(st.equals("C"))
+            {
+               tot_points-=lis.removeLast(); 
+            }else if(st.equals("D")){
+                lis.add(lis.peekLast()*2);
+                tot_points+=lis.peekLast();
+            }else if(st.equals("+")){
+                lis.add(lis.peekLast()+lis.get(lis.size()-2));
+                tot_points+=lis.peekLast();
+            }else{
+                lis.add(Integer.parseInt(st));
+                tot_points+=lis.peekLast();
+            }
+        }
+        return tot_points;
+    }
+}
