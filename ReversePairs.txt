@@ -1,0 +1,23 @@
+class Solution {
+    public int reversePairs(int[] nums) {
+        return mergeSort(nums,0,nums.length -1);
+    }
+    
+    public int mergeSort(int[] nums,int l,int r)
+    {
+        if(l>=r)
+            return 0;
+        int mid=l+(r-l)/2;
+        int cnt=mergeSort(nums,l,mid)+mergeSort(nums,mid+1,r);
+        for(int i=l,j=mid+1;i<=mid;i++)
+        {
+            while(j<=r && nums[i]/2.0 >  nums[j])
+            {
+                j++;
+            }
+            cnt+=j-(mid+1);
+        }
+        Arrays.sort(nums,l,r+1);
+        return cnt;
+    }
+}
