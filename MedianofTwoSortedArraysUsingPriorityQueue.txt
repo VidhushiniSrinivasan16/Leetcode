@@ -1,0 +1,62 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int total=nums1.length+nums2.length;
+        boolean even=false;
+        int  med_idx=total/2+1;
+       if(total%2==0)
+           even=true;
+        int count=0;
+        int i=0;
+        int j=0;
+        PriorityQueue<Integer> pq=new PriorityQueue<Integer>(new Comparator<Integer>()
+        {
+           @Override
+            public int compare(Integer a,Integer b)
+            {
+                return b-a;
+            }
+         });
+       
+            
+            while(i<nums1.length && j<nums2.length)
+            {
+                if(nums1[i]<nums2[j])
+                {
+                    System.out.println(nums1[i]);
+                    pq.offer(nums1[i]);
+                    i++;
+                }else{
+                    System.out.println(nums2[j]);
+                    pq.offer(nums2[j]);
+                    j++;
+                }
+                count++;
+                if(count==med_idx)
+                    break;
+            }
+           while(i<nums1.length && count!=med_idx)
+           {
+               pq.offer(nums1[i]);
+               i++;
+               count++;
+           }
+          while(j<nums2.length && count!=med_idx)
+           {
+              System.out.println("Hi");
+               pq.offer(nums2[j]);
+               j++;
+               count++;
+           }
+            
+           
+           // System.out.println(pq.peek());
+            
+        
+         
+        if(even)
+        {
+            return (pq.poll()+pq.poll())/2.0;
+        }
+        return pq.poll();
+    }
+}
