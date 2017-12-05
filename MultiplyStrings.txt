@@ -1,0 +1,46 @@
+import java.math.BigInteger;
+class Solution {
+    public String multiply(String num1, String num2) {
+        if(num1==null||num2==null)
+            return new String("");
+        num1=num1.trim();
+        num2=num2.trim();
+        if(num1.isEmpty()||num2.isEmpty())
+            return new String("");
+        List<Long> lis=new ArrayList<Long>();
+        int k=0,l=0;
+        int carry=0;
+        int n=num2.length();
+        int m=num1.length();
+        BigInteger res=new BigInteger("0");
+        for(int i=n-1;i>=0;i--)
+        {
+            StringBuilder sb=new StringBuilder();
+            
+            for(int j=m-1;j>=0;j--)
+            {
+                int val=(num2.charAt(i)-'0')*(num1.charAt(j)-'0');
+                if(carry>0){
+                    val+=carry;
+                }
+                while(k>0){
+                    sb.append("0");
+                    k--;
+                }
+                
+                sb.append(val%10);
+                carry=val/10;
+               
+            }
+             System.out.println(sb.toString());
+            if(carry>0)
+                sb.append(carry);
+            carry=0;
+            res=res.add(new BigInteger(sb.reverse().toString()));
+            l++;
+            k=l;
+            
+        }
+        return res.toString();
+    }
+}

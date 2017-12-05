@@ -1,0 +1,27 @@
+class Solution {
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        Set<List<Integer>> hs=new HashSet<List<Integer>>();
+        dfs(hs,new ArrayList<Integer>(),nums,0);
+        List res=new ArrayList(hs);
+        return res;
+    }
+    
+    public void dfs(Set<List<Integer>> res,List<Integer> lis,int[] nums,int start)
+    {
+        if(lis.size()>=2)
+        {
+            res.add(new ArrayList(lis));
+        }
+            for(int i=start;i<nums.length;i++)
+            {
+                if(lis.size()==0 || lis.get(lis.size()-1)<=nums[i])
+                {
+                lis.add(nums[i]);
+                
+                dfs(res,lis,nums,i+1);
+                lis.remove(lis.size()-1);
+                }
+            }
+        
+    }
+}
