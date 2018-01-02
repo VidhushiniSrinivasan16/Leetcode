@@ -1,0 +1,25 @@
+class Solution {
+    public int compress(char[] chars) {
+        int n=chars.length;
+        int idx1=0;int idx2=0;
+        while(idx1<n)
+        {
+            char ch=chars[idx1];
+            int count=0;
+            while(idx1<n && chars[idx1]==ch)
+            {
+                idx1++;
+                count++;
+            }
+            chars[idx2++]=ch;
+            if(count!=1)
+            {
+                for(char c:Integer.toString(count).toCharArray())
+                {
+                    chars[idx2++]=c;
+                }
+            }
+        }
+        return idx2;
+    }
+}
