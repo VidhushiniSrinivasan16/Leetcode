@@ -1,0 +1,24 @@
+class Solution {
+    public String mostCommonWord(String paragraph, String[] banned) {
+        if(paragraph==null||paragraph.isEmpty()){
+            return null;
+        }
+        String[] para_processed=paragraph.replaceAll("\\pP","").toLowerCase().split("\\s+");
+        HashMap<String,Integer> hmap=new HashMap<String,Integer>();
+        int max=Integer.MIN_VALUE;
+        String result="";
+        List<String> banned_list=new ArrayList<String>(Arrays.asList(banned));
+        for(String str:para_processed){
+            if(banned_list.contains(str)){
+                continue;
+            }
+            hmap.put(str,hmap.getOrDefault(str,0)+1);
+            int cur_max=hmap.get(str);
+            if(max<cur_max){
+                max=cur_max;
+                result=str; 
+            }
+        }
+        return result;
+    }
+}
