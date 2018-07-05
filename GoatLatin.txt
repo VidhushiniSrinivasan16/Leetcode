@@ -1,0 +1,28 @@
+class Solution {
+    public String toGoatLatin(String S) {
+        if(S==null||S.isEmpty()){
+            return S;
+        }
+        String[] tokens=S.split("\\s+");
+        StringBuilder result=new StringBuilder("");
+        StringBuilder a_string=new StringBuilder("a");
+        String vowel="aeiouAEIOU";
+        for(String str:tokens){
+            if(vowel.contains(String.valueOf(str.charAt(0)))){
+                result.append(str);
+                result.append("ma");
+                result.append(a_string.toString()+" ");
+            }else{
+                if(str.length()>1){
+                     result.append(str.substring(1));
+                }
+                result.append(str.charAt(0));
+                result.append("ma");
+                result.append(a_string.toString()+" ");
+
+            }
+            a_string.append("a");
+        }
+        return result.toString().trim();
+    }
+}
