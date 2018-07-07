@@ -1,0 +1,55 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
+        List<Integer> result = new ArrayList<Integer>();
+        getAlldistanceKNodes(root,target,K,result);
+        return result;
+    }
+    public int getAlldistanceKNodes(TreeNode root,TreeNode target,int k,List<Integer> res){
+        if(root==null)
+            return -1;
+        if(root==target){
+            getAlldistanceknodesFromRoot(root,k,res);
+            return 0;
+        }
+        int distance_left = getAlldistanceKNodes(root.left,target,k,res);
+        if(distance_left!=-1){
+            if(distance_left+1==k){
+                res.add(root.val);
+            }else{
+                getAlldistanceknodesFromRoot(root.right,k-distance_left-2,res);
+            }
+            return distance_left+1;
+        }
+        
+        int distance_right = getAlldistanceKNodes(root.right,target,k,res);
+        if(distance_right!=-1){
+            if(distance_right+1==k){
+                res.add(root.val);
+            }else{
+                getAlldistanceknodesFromRoot(root.left,k-distance_right-2,res);
+            }
+            return distance_right+1;
+        }
+        return -1;
+    }
+    
+    public void getAlldistanceknodesFromRoot(TreeNode root,int k,List<Integer> res){
+        if(root==null||k<0){
+            return;
+        }
+        if(k==0){
+            res.add(root.val);
+        }
+        getAlldistanceknodesFromRoot(root.left,k-1,res);
+        getAlldistanceknodesFromRoot(root.right,k-1,res);
+    }
+}
