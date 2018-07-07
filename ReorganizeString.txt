@@ -1,0 +1,36 @@
+import java.util.*;
+class Solution {
+    public String reorganizeString(String S) {
+        if(S==null||S.isEmpty()||S.length()==1)
+            return S;
+        HashMap<Character,Integer> hmap=new HashMap<Character,Integer>();
+        for(char ch:S.toCharArray()){
+            hmap.put(ch,hmap.getOrDefault(ch,0)+1);
+        }
+        PriorityQueue<Map.Entry<Character,Integer>> pq =new PriorityQueue<>(
+            new Comparator<Map.Entry<Character,Integer>>(){
+                @Override
+                public int compare(Map.Entry<Character,Integer> a, Map.Entry<Character,Integer> b){
+                    return b.getValue() - a.getValue();
+                }
+            });
+        pq.addAll(hmap.entrySet());
+        Map.Entry<Character,Integer> prev =  new AbstractMap.SimpleEntry<Character,Integer>('#',-1);
+        StringBuilder res=new StringBuilder();
+        while(!pq.isEmpty()){
+            Map.Entry e = pq.poll();
+            Character K = (Character)e.getKey();
+            res.append(K);   
+            if(prev.getValue() > 0){
+                pq.add(prev);
+            }
+            int freq = (int)(e.getValue())-1;
+            e.setValue(freq);
+            prev=e;  
+            
+        }
+        if(res.length()==S.length())
+            return res.toString();
+        return "";
+    }
+}
