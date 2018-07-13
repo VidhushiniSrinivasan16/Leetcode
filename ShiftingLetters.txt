@@ -1,0 +1,13 @@
+class Solution {
+    public String shiftingLetters(String S, int[] shifts) {
+        if(S==null||S.isEmpty())
+            return S;
+        StringBuilder str=new StringBuilder(S);
+        for(int i=0;i<str.length();i++){
+            for(int j=0;j<=i;j++){
+            str.setCharAt(j,(char)(((str.charAt(j)- 'a'+shifts[i])%26)+'a'));
+            }
+        }
+        return str.toString();
+    }
+}

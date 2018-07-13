@@ -1,0 +1,31 @@
+TLE
+
+class Solution {
+    public int numMatchingSubseq(String S, String[] words) {
+
+        int cnt=0;
+        for(String word: words){
+            if(S.contains(word)||isSubsequence(word,S)){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+    
+    public boolean isSubsequence(String source,String target){
+        int m=source.length();
+        int n=target.length();
+         if(n<m){
+             return false;
+         }
+        int j=0;
+        for(int i=0;i<n && j<m;i++){
+            if(source.charAt(j)==target.charAt(i)){
+                j++;
+            }
+        }
+        return j==m;
+    }
+}
+
+
