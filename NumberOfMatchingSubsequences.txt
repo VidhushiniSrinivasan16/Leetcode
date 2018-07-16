@@ -29,3 +29,31 @@ class Solution {
 }
 
 
+
+
+
+class Solution {
+    public int numMatchingSubseq(String S, String[] words) {
+        Map<Character,Deque<String>> hmap=new HashMap<>();
+        for(char c='a';c<='z';c++){
+            hmap.putIfAbsent(c,new LinkedList<String>());
+        }
+        for(String word:words){
+            hmap.get(word.charAt(0)).addLast(word);
+        }
+        int cnt=0;
+        for( char c:S.toCharArray()){
+            Deque<String> queue=hmap.get(c);
+            int size=queue.size();
+            for(int i=1;i<=size;i++){
+                String word=queue.removeFirst();
+                if(word.length()==1){
+                    cnt++;
+                }else{             
+                    hmap.get(word.charAt(1)).addLast(word.substring(1));
+                }
+            }
+        }
+        return cnt;
+    }
+}
