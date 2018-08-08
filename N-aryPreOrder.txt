@@ -1,0 +1,68 @@
+Recursive
+
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val,List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+class Solution {
+    List<Integer> lis=new ArrayList<Integer>();
+    public List<Integer> preorder(Node root) {
+        if(root==null){
+            return lis;
+        }
+        lis.add(root.val);
+
+        for(Node n:root.children){
+            preorder(n);
+        }
+        return lis;
+    }
+}
+
+
+Iterative
+
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val,List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+class Solution {
+    public List<Integer> preorder(Node root) {
+        List<Integer> result = new ArrayList<Integer>();
+        if(root==null){
+            return result;
+        }
+        Stack<Node> st=new Stack<Node>();
+        st.push(root);
+        while(st.empty()==false){
+            Node tmp=st.pop();
+            Collections.reverse(tmp.children);
+            for(Node n:tmp.children){
+                st.push(n);
+            }
+            result.add(tmp.val);
+
+        }
+        return result;
+    }
+}
