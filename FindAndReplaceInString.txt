@@ -1,0 +1,26 @@
+class Solution {
+    public String findReplaceString(String S, int[] indexes, String[] sources, String[] targets) {
+        if(S.isEmpty()||S==null)
+            return S;
+        StringBuilder sb=new StringBuilder();
+        HashMap<Integer,Integer> hmap=new HashMap<Integer,Integer>();
+        int l=0;
+        for(int idx:indexes){
+            hmap.put(idx,l);
+            l++;
+        }
+        int idx=0,j=0;
+        for(int k=0;k<S.length();k++){
+            j=0;
+            if(hmap.containsKey(k) && S.substring(k,k+sources[hmap.get(k)].length()).equals(sources[hmap.get(k)])){
+                sb.append(targets[hmap.get(k)]);
+                j=S.substring(k,k+sources[hmap.get(k)].length()).length()-1;
+            }else{
+                sb.append(S.charAt(k));
+            }
+            k+=j;
+        }
+        return sb.toString();
+    }
+    
+}
