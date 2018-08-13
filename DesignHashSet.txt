@@ -1,0 +1,31 @@
+class MyHashSet {
+    HashMap<Integer,Integer> hm;
+    /** Initialize your data structure here. */
+    public MyHashSet() {
+        hm=new  HashMap<Integer,Integer>();
+        
+    }
+    
+    public void add(int key) {
+        if(!hm.containsKey(key)){
+        hm.put(key,null);
+        }
+    }
+    
+    public void remove(int key) {
+        hm.remove(key);
+    }
+    
+    /** Returns true if this set contains the specified element */
+    public boolean contains(int key) {
+        return hm.containsKey(key);
+    }
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
