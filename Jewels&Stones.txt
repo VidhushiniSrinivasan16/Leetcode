@@ -1,0 +1,14 @@
+class Solution {
+    public int numJewelsInStones(String J, String S) {
+        Map<Character,Integer> hmap=new HashMap<Character,Integer>();
+        for(char ch:J.toCharArray()){
+            hmap.put(ch,hmap.getOrDefault(ch,0));
+        }
+        for(char ch:S.toCharArray()){
+            if(hmap.containsKey(ch)){
+            hmap.put(ch,hmap.getOrDefault(ch,0)+1);
+            }
+        }
+        return hmap.values().stream().mapToInt(Number::intValue).sum();
+    }
+}
