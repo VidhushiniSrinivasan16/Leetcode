@@ -1,0 +1,19 @@
+class Solution {
+    public int nthUglyNumber(int n) {
+        int[] ugly_num=new int[n];
+        ugly_num[0]=1;
+        int idx_2=0,idx_3=0,idx_5=0;
+        int fct_2=2,fct_3=3,fct_5=5;
+        for(int i=1;i<n;i++){
+            int res=Math.min(Math.min(fct_2,fct_3),fct_5);
+            ugly_num[i]=res;
+            if(fct_2==res)
+                fct_2=2*ugly_num[++idx_2];
+            if(fct_3==res)
+                fct_3=3*ugly_num[++idx_3];
+            if(fct_5==res)
+                fct_5=5*ugly_num[++idx_5];
+        }
+        return ugly_num[n-1];
+    }
+}
