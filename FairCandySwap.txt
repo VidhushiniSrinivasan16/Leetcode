@@ -1,0 +1,26 @@
+class Solution {
+    public int[] fairCandySwap(int[] A, int[] B) {
+       int sumA=0;
+       int sumB=0;
+       int[] res=new int[2];
+       HashSet<Integer> hs=new HashSet<Integer>();
+        for(int k:A){
+            sumA+=k;
+            
+        }
+        for(int m:B){
+            sumB+=m;
+            hs.add(m);
+        }
+        int halfSum=(sumA+sumB)/2;
+        for(int j: A){
+            System.out.println(halfSum-(sumA-j));
+            if(hs.contains(halfSum-(sumA-j))){
+                res[0]=j;
+                res[1]=halfSum-(sumA-j);
+                break;
+            }
+        }
+        return res;
+    }
+}
