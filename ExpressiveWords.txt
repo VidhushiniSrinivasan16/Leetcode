@@ -1,0 +1,46 @@
+class Solution {
+    public int expressiveWords(String S, String[] words) {
+        if(S==null || S.isEmpty()){
+            return 0;
+        }
+        int count=0;
+        for(String word:words){
+            if(isStretch(S,word)){
+                count++;
+            }
+        }
+        return count;
+       
+    }
+     private boolean isStretch(String s,String t){
+         if(t==null||t.length()==0)
+             return false;
+         if(s.length()<=t.length()+1)
+             return false;
+         int i=0,j=0;
+         while(i<s.length() && j<t.length()){
+             if(s.charAt(i)!=t.charAt(j)){
+                 return false;
+             }
+             int c_s=1,c_t=1;
+
+             while(i+1<s.length() && s.charAt(i)==s.charAt(i+1)){
+                 c_s++;
+                 i++;
+                }
+             while(j+1<t.length() && t.charAt(j)==t.charAt(j+1)){
+                 c_t++;
+                 j++;
+                }
+             if(c_s==c_t||c_s>=3){
+                 i++;
+                 j++;
+             }else {
+                 return false;
+             }
+            
+             }
+         return true;
+     }
+    
+}
