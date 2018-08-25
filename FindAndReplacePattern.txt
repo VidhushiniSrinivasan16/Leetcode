@@ -1,0 +1,33 @@
+class Solution {
+    public List<String> findAndReplacePattern(String[] words, String pattern) {
+        List<String> result=new ArrayList<String>();
+        if(pattern==null||pattern.isEmpty()){
+            return result;
+        }
+        for(String word:words){
+            if(word.length()!=pattern.length()||word==null||word.isEmpty()){
+                continue;
+            }
+            if(is_PatternMatch(word.toCharArray(),pattern.toCharArray())){
+                result.add(word);
+            }
+        }
+        return result;
+    }
+    
+    private boolean is_PatternMatch(char[] word,char[] pattern){
+        int[] word_lis=new int[26];
+        int[] pattern_lis=new int[26];
+        for(int i=0;i<word.length;i++){
+            int w_idx = word[i] - 97;
+            int p_idx=  pattern[i] - 97;
+            //System.out.println(word_lis[w_idx]+" "+pattern_lis[p_idx]);
+            if(word_lis[w_idx]!=pattern_lis[p_idx]){
+                return false;
+            }
+            word_lis[word[i]-97]=i+1;
+            pattern_lis[pattern[i]-97]=i+1;
+        }
+        return true;
+    }
+}
