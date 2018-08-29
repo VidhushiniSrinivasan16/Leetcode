@@ -1,0 +1,30 @@
+class Solution {
+    HashMap<Integer,List<Integer>> hmap;
+    Random rand;
+    public Solution(int[] nums) {
+        hmap =new HashMap<Integer,List<Integer>>();
+        rand=new Random();
+        for(int i=0;i<nums.length;i++){
+            if(!hmap.containsKey(nums[i])){
+                List<Integer> lis=new ArrayList<Integer>();
+                lis.add(i);
+                hmap.put(nums[i],lis);
+            }else{
+                hmap.get(nums[i]).add(i);
+            }
+        }
+        
+    }
+    
+    public int pick(int target) {
+        List<Integer> indices= hmap.get(target);
+        int idx=rand.nextInt(indices.size());
+        return indices.get(idx);
+    }
+}
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(nums);
+ * int param_1 = obj.pick(target);
+ */
