@@ -1,0 +1,100 @@
+class MyHashMap {
+       private ArrayList<HashNode> bucket;
+       private int size; 
+       private int numBuckets;
+    /** Initialize your data structure here. */
+    public MyHashMap() {
+        bucket = new ArrayList<HashNode>();
+        size =0;
+        numBuckets = 1000000;
+        
+        for(int i=1;i<=numBuckets;i++){
+            bucket.add(null);
+        }
+        
+    }
+    public int size(){
+        return size;
+    }
+    private int getBucketIndex(int key){
+        int hc = Integer.hashCode(key);
+        return hc%numBuckets;
+    }
+    /** value will always be non-negative. */
+    public void put(int key, int value) {
+       int idx =  getBucketIndex(key);
+       HashNode head = bucket.get(idx);
+        //check if key is present - if yes update the value
+       while(head!=null){
+           if(head.key==key){
+               head.val=value;
+               return;
+             }
+           head=head.next;
+       }
+      size++;
+      HashNode newNode=new HashNode(key,value);
+      newNode.next = head;
+      bucket.set(idx,newNode);
+      
+    }
+    
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    public int get(int key) {
+        int idx = getBucketIndex(key);
+        HashNode head = bucket.get(idx);
+        while(head!=null){
+            if(head.key==key){
+                return head.val;
+            }
+            head=head.next;
+        }
+        return -1;
+    }
+    
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    public void remove(int key) {
+        int idx = getBucketIndex(key);
+        HashNode head = bucket.get(idx);
+        
+        HashNode prev = null;
+        while(head!=null){
+            if(head.key==key){
+                break;
+            }
+            prev=head;
+            head=head.next;
+        }
+        
+        if(head==null)
+            return;
+        size--;
+        if(prev==null){
+            bucket.set(idx,head.next);
+        }else{
+            prev.next=head.next;
+        }
+
+    }
+}
+
+class HashNode{
+    int key;
+    int val;
+    
+    HashNode next;
+    
+    public HashNode(int k,int v){
+        this.key=k;
+        this.val=v;
+    }
+
+}
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap obj = new MyHashMap();
+ * obj.put(key,value);
+ * int param_2 = obj.get(key);
+ * obj.remove(key);
+ */
