@@ -1,0 +1,20 @@
+class Solution {
+    public String longestWord(String[] words) {
+        if(words==null||words.length==0)
+            return null;
+        Arrays.sort(words);
+        Set<String> hs=new HashSet<String>();
+        hs.add("");
+        String longest_word="";
+        for(String word: words){
+            String match=word.substring(0,word.length()-1);
+            if(hs.contains(match)){
+                    hs.add(word);
+                    if(word.length()>longest_word.length()){
+                         longest_word=word;
+                    }
+            }
+        }
+        return longest_word;
+    }
+}
