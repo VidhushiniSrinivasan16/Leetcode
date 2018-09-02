@@ -1,0 +1,23 @@
+class Solution {
+    public boolean isMonotonic(int[] A) {
+        int n=A.length;
+        if(n<=2){
+            return true;
+        }
+        
+        boolean increase=true;
+        boolean decrease = true;
+        
+        
+        for(int i=1;i<n;i++){
+            if(A[i-1]<A[i]){
+                decrease=false;
+            }else if(A[i-1]>A[i]){
+                increase=false;
+            }
+           if(!increase && !decrease)
+               return false;
+        }
+        return true;
+    }
+}
