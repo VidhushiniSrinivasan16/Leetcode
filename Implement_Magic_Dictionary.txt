@@ -1,0 +1,44 @@
+class MagicDictionary {
+    List<String> lis;
+   
+    /** Initialize your data structure here. */
+    public MagicDictionary() {
+        lis=new ArrayList<String>();
+    }
+    
+    /** Build a dictionary through a list of words */
+    public void buildDict(String[] dict) {
+        for(String str:dict){
+            lis.add(str);
+        }
+    }
+    
+    /** Returns if there is any word in the trie that equals to the given word after modifying exactly one character */
+    public boolean search(String word) {
+        int i=0;
+        int count=0;
+        for(String w:lis){
+            i=0;
+            count=0;
+            for(char ch:w.toCharArray()){
+                if(i<word.length() && ch!=word.charAt(i)){
+                    count++;
+                    if(count>1)
+                       break;
+                }
+                if(i==word.length()-1 && i==w.length()-1 && count>0){
+                    return true;
+                }
+                i++;
+            }
+        }
+        return false;
+    }
+}
+
+/**
+ * Your MagicDictionary object will be instantiated and called as such:
+ * MagicDictionary obj = new MagicDictionary();
+ * obj.buildDict(dict);
+ * boolean param_2 = obj.search(word);
+ */
