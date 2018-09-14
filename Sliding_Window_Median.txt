@@ -1,0 +1,32 @@
+class Solution {
+    public double[] medianSlidingWindow(int[] nums, int k) {
+        int n=nums.length;
+        double[] median=new double[n-k+1];
+        PriorityQueue<Integer> maxHeap=new PriorityQueue<Integer>(Collections.reverseOrder());
+        PriorityQueue<Integer> minHeap=new PriorityQueue<Integer>();
+        double temp_res=0.0;
+        for(int i=0;i<n;i++){
+            maxHeap.offer(nums[i]);
+            minHeap.offer(maxHeap.poll());
+            if(maxHeap.size()<minHeap.size()){
+                maxHeap.offer(minHeap.poll());
+            }
+            if(maxHeap.size()+minHeap.size()==k){
+                if(maxHeap.size()==minHeap.size()){
+                    temp_res=(double)((long)maxHeap.peek()+(long)minHeap.peek())/2;
+                }else{
+                    temp_res=maxHeap.peek();
+                }
+            
+            
+            int loc=i-k+1;
+            //System.out.println(loc);
+            median[loc]=temp_res;
+            if(!maxHeap.remove(nums[loc])){
+                minHeap.remove(nums[loc]);
+            }
+          }
+        }
+        return median;
+    }
+}
