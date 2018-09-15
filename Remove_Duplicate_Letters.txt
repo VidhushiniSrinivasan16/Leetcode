@@ -1,0 +1,32 @@
+class Solution {
+    public String removeDuplicateLetters(String s) {
+        if(s==null||s.length()==0){
+            return s;
+        }
+        int[] count=new int[26];
+        boolean[] visited= new boolean[26];
+        for(int i=0;i<s.length();i++){
+            count[s.charAt(i)-'a']++;
+        }
+        Stack<Character> st=new Stack<Character>();
+        for(int i=0;i<s.length();i++){
+            int idx=s.charAt(i)-'a';
+            count[idx]--;
+            if(visited[idx]) continue;
+            
+            char ch= s.charAt(i);
+            while(!st.isEmpty() && ch<st.peek() && count[st.peek()-'a']!=0){
+                visited[st.pop()-'a']=false;
+            }
+            st.push(ch);
+            visited[idx]=true;
+        }
+        
+        StringBuilder sb=new StringBuilder();
+        
+        while(!st.isEmpty()){
+            sb.insert(0,st.pop());
+        }
+       return sb.toString(); 
+    }
+}

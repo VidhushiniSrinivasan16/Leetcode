@@ -1,0 +1,14 @@
+class Solution {
+    public List<Integer> lexicalOrder(int n) {
+        List<Integer> res=new ArrayList<Integer>();
+        backtrack(1,n,res);
+        return res;
+    }
+    private void backtrack(int cur,int n,List<Integer> res){
+        if(cur>n)
+            return;
+        res.add(cur);
+        backtrack(cur*10,n,res);
+        if(cur%10!=9) backtrack(cur+1,n,res);
+    }
+}
