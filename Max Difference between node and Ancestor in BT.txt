@@ -1,0 +1,19 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int maxAncestorDiff(TreeNode root) {
+        return findDiff(root,100000,0);
+    }
+    
+    int findDiff(TreeNode root,int min,int max){
+        return root==null?max-min: Math.max(findDiff(root.left,Math.min(root.val,min),Math.max(root.val,max)),
+                                       findDiff(root.right,Math.min(root.val,min),Math.max(root.val,max)));
+    }
+}
