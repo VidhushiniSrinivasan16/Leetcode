@@ -1,0 +1,23 @@
+class Solution {
+    public List<Integer> addToArrayForm(int[] A, int K) {
+        
+        List<Integer> lis=new ArrayList<Integer>();
+        int n=A.length;
+        int rem=0,carry=0;
+        for(int i=n-1;i>=0;i--){
+             rem = (K%10);               
+             lis.add(0, (A[i]+ rem+carry) %10);
+             carry = (A[i]+rem+carry)/10;
+             K=K/10;
+        }
+        while(K!=0||carry!=0){
+            lis.add(0,(carry+(K%10))%10);
+            carry= (carry+(K%10))/10;
+            K=K/10;
+        }
+        
+        
+        return lis;
+            
+    }
+}
