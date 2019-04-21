@@ -1,0 +1,11 @@
+class Solution {
+    public List<Boolean> prefixesDivBy5(int[] A) {
+        List<Boolean> res=new ArrayList<Boolean>();
+        int ans=0;
+        for(int a:A){
+            ans=(ans<<1|a)%5;
+            res.add(ans==0);
+        }
+        return res;
+    }
+}
