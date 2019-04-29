@@ -1,0 +1,17 @@
+class Solution {
+    public boolean canThreePartsEqualSum(int[] A) {
+        int total= Arrays.stream(A).sum();
+        if(total%3!=0){
+            return false;
+        }
+        int parts=0,sum=0;
+        for(int i=0;i<A.length && parts<2;i++){
+            sum+=A[i];
+            if(sum==total/3){
+                parts++;
+                sum=0;
+            }
+        }
+        return parts==2;
+    }
+}
