@@ -1,0 +1,11 @@
+class Solution {
+    public String[] findOcurrences(String text, String first, String second) {
+        String[] word_lis = text.split(" ");
+        List<String> ans=new ArrayList<String>();
+        for(int i=2;i<word_lis.length;i++){
+            if(first.equals(word_lis[i-2]) && second.equals(word_lis[i-1]))
+                ans.add(word_lis[i]);
+        }
+        return ans.toArray(new String[0]);
+    }
+}
