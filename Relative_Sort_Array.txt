@@ -1,0 +1,29 @@
+class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        Map<Integer,Integer> map = new HashMap<Integer,Integer>();
+        int[] result = new int[arr1.length];
+        for(int n: arr1){
+            map.put(n, map.getOrDefault(n,0)+1);
+        }
+        int c=0;
+        for(int n :arr2){
+            Integer k = map.get(n);
+            for(int i=0;i<k;i++){
+                     result[c] = n;
+                     c++;
+                }
+                map.remove(n);       
+        }
+        TreeMap<Integer, Integer> sorted = new TreeMap<>(); 
+        sorted.putAll(map);
+        for (Map.Entry<Integer, Integer> entry : sorted.entrySet()){
+            int times = (int)entry.getValue();
+            for(int i=0;i<times;i++){
+                  result[c] = (int)entry.getKey();
+                  c++;
+            }
+        }
+        return result;
+        
+    }
+}
