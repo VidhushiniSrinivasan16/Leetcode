@@ -1,0 +1,15 @@
+class Solution {
+    public int numEquivDominoPairs(int[][] dominoes) {
+        int count=0;
+        Map<Integer,Integer> map=new HashMap<>();
+        for(int[] a : dominoes){
+            int max = Math.max(a[0],a[1]), min = Math.min(a[0],a[1]);
+            int key = min * 10 + max;
+            int pairs = map.getOrDefault(key,0);
+            count+=pairs;
+            map.put(key,1+pairs);
+            
+        }
+        return count;
+    }
+}
