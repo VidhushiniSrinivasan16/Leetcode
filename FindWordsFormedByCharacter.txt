@@ -1,0 +1,26 @@
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+        int[] cnt = new int[26];
+        int len=0;
+        for(int i=0;i<chars.length();i++){
+            cnt[chars.charAt(i)-'a']++;
+        }
+        for(String word:words){
+            int[] copy = cnt.clone();
+            boolean flag = true;
+            for(int i=0;i<word.length();i++){
+                char ch = word.charAt(i);
+                if(copy[ch - 'a']>0){
+                    copy[ch-'a']--;
+                }else{
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag){
+                len+=word.length();
+            }
+        }
+        return len;
+    }
+}
