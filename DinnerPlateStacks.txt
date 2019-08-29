@@ -1,0 +1,52 @@
+class DinnerPlates {
+    private static int capacity;
+    ArrayList<Stack<Integer>> plates;
+    TreeSet<Integer> push_index;
+    TreeSet<Integer> pop_index;
+    public DinnerPlates(int capacity) {
+        this.capacity = capacity;
+        plates = new ArrayList<>();
+        push_index = new TreeSet<>();
+        pop_index = new TreeSet<>();
+    }
+    
+    public void push(int val) {
+        if(push_index.size()==0){
+            push_index.add(plates.size());
+            plates.add(new Stack<Integer>());
+        }
+        int index = push_index.first();
+        Stack<Integer> st = plates.get(index);
+        st.push(val);
+        pop_index.add(index);
+        if(st.size()==capacity)
+            push_index.remove(index);
+        
+    }
+    
+    public int pop() {
+        if(pop_index.size()==0)
+            return -1;
+        int index = pop_index.last();
+        return popAtStack(index);      
+    }
+    
+    public int popAtStack(int index) {
+        if(!pop_index.contains(index))
+            return -1;
+        Stack<Integer> st = plates.get(index);
+        int x = st.pop();
+        push_index.add(index);
+        if(st.size()==0)
+            pop_index.remove(index);
+        return x;
+    }
+}
+
+/**
+ * Your DinnerPlates object will be instantiated and called as such:
+ * DinnerPlates obj = new DinnerPlates(capacity);
+ * obj.push(val);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.popAtStack(index);
+ */

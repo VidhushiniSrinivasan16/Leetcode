@@ -1,0 +1,35 @@
+class Solution {
+    public int[] numSmallerByFrequency(String[] queries, String[] words) {
+         int[] res=new int[queries.length];
+         int[] word_lis = new int[words.length];   
+         int i=0, j=0,count = 0;
+         for(String word:words){
+             word_lis[i] = smallFrequency(word);
+             i++;
+         }
+        for(String word : queries){
+            int freq = smallFrequency(word);
+            count = 0;
+            for(int n : word_lis){
+                if(freq < n)
+                    count++;
+            }
+            res[j] = count;
+            j++;
+        }
+        return res;
+    }
+    
+    public int smallFrequency(String word){
+        int[] count = new int[26];
+        for(int i=0;i<word.length();i++){
+            count[word.charAt(i)-'a']++;
+        }
+        for(int i =0;i<26;i++){
+            if(count[i]>0){
+                return count[i];
+            }
+        }
+        return -1;
+    }
+}
