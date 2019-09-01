@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isCousins(TreeNode root, int x, int y) {
+        return ((level(root,x,1) == level(root,y,1)) && !isSibling(root,x,y));
+    }
+    
+    public int level(TreeNode node, int x, int l){
+        if(node==null){
+            return 0;
+        }
+        if(node.val == x){
+            return l;
+        }
+        int lev = level(node.left,x,l+1);
+        if(lev!=0)
+            return lev;
+        return level(node.right,x,l+1);
+    }
+    
+    public boolean isSibling(TreeNode node, int x, int y){
+        if(node == null)
+            return false;
+        return ((node.left!=null && node.right!=null && node.left.val==x && node.right.val==y) ||(node.left!=null && node.right!=null &&node.left.val==y && node.right.val==x) ||isSibling(node.left, x,y) || isSibling(node.right,x,y));
+    }
+}
