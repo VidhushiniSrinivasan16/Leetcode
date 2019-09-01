@@ -1,0 +1,22 @@
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>(){
+            @Override
+            public int compare (Integer x,Integer y){
+                return y-x;
+            }
+        });
+        
+        for(int n:stones){
+            pq.add(n);
+        }
+        while(pq.size()>=2){
+            int x = pq.poll();
+            int y = pq.poll();
+            if(x!=y){
+                pq.add(x-y);
+            }
+        }
+        return pq.size()==0?0:pq.poll();
+    }
+}
