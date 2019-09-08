@@ -1,0 +1,17 @@
+class Solution {
+    public int subarraysDivByK(int[] A, int K) {
+        int n=A.length;
+        int[] group = new int[K];
+        int sum=0,total=0;
+        for(int i=0;i<n;i++){
+            sum+=A[i];
+            int gp = sum%K;
+            if(gp<0) gp+=K;
+            group[gp]++;
+            
+        }
+        for(int x:group)
+            if(x>1) total+=x*(x-1)/2;
+        return total+group[0];
+    }
+}

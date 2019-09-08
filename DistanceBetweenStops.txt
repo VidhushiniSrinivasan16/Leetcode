@@ -1,0 +1,26 @@
+class Solution {
+    public int distanceBetweenBusStops(int[] distance, int start, int destination) {
+        int totalSum =0;
+        int n=distance.length;
+        int[] prefixSum = new int[n];
+        prefixSum[0]=distance[0];
+        for(int i=0;i<n;i++){
+            totalSum+=distance[i];
+            if(i>0){
+                prefixSum[i]=distance[i]+prefixSum[i-1];
+            }
+        }
+        int temp = 0;
+        if(start > destination){
+            temp = start;
+            start=destination;
+            destination=temp;
+        }
+        int diff = 0;
+        if(start!=0){
+            diff = prefixSum[start-1];
+        }
+        return Math.min(prefixSum[destination-1]-diff,diff+prefixSum[n-1]-prefixSum[destination-1]);
+        
+    }
+}

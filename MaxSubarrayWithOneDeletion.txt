@@ -1,0 +1,27 @@
+class Solution {
+    public int maximumSum(int[] arr) {
+        int n=arr.length;
+        int[] fw = new int[n];
+        int[] bw = new int[n];
+        int max_so_far = arr[0], curr_max = arr[0];
+        fw[0] = arr[0];
+        for(int i =1;i<n;i++){
+            curr_max = Math.max(arr[i],curr_max+arr[i]);
+            max_so_far=Math.max(max_so_far,curr_max);
+            fw[i]=curr_max;
+        }
+        max_so_far =curr_max= bw[n-1]= arr[n-1];
+         for(int i =n-2;i>=0;i--){
+            curr_max = Math.max(arr[i],curr_max+arr[i]);
+            max_so_far=Math.max(max_so_far,curr_max);
+            bw[i]=curr_max;
+        }
+        
+        int result = max_so_far;
+        for(int i=1;i<n-1;i++){
+            result=Math.max(result,fw[i-1]+bw[i+1]);
+        }
+        return result;
+        
+    }
+}

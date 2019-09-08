@@ -1,0 +1,28 @@
+class Solution {
+    public int[][] kClosest(int[][] points, int K) {
+        int[][] res = new int[K][2];
+        Queue<String> pq = new PriorityQueue<>(new Comparator<String>(){
+            public int compare(String as,String bs){
+                 String[] a = as.split(",");
+                 String[] b = bs.split(",");
+                 return (int)(Math.pow(0-Integer.parseInt(a[0]),2)+Math.pow(0-Integer.parseInt(a[1]),2)) - (int)(Math.pow(0-Integer.parseInt(b[0]),2)+Math.pow(0-Integer.parseInt(b[1]),2));
+            }       
+        });
+        
+        for(int[] p: points){
+            String ans = p[0]+","+p[1];
+            pq.add(ans);
+        }
+        int i=0;
+        while(K>0){
+            String k = (String)pq.poll();
+            String[] k_s = k.split(",");
+            res[i][0] = Integer.parseInt(k_s[0]);
+            res[i][1] = Integer.parseInt(k_s[1]);
+            i++;
+            K--;
+        }
+        return res;
+    }                                         
+                                               
+}
