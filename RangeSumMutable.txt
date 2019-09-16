@@ -1,0 +1,27 @@
+class NumArray {
+    List<Integer> data;
+    public NumArray(int[] nums) {
+        data = new ArrayList<>();
+        for(int n:nums)
+            data.add(n);
+    }
+    
+    public void update(int i, int val) {
+        data.set(i,val);
+    }
+    
+    public int sumRange(int i, int j) {
+        int res=0;
+        for(int k=i;k<=j;k++){
+            res+=data.get(k);
+        }
+        return res;
+    }
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * obj.update(i,val);
+ * int param_2 = obj.sumRange(i,j);
+ */

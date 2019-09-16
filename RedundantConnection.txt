@@ -1,0 +1,22 @@
+class Solution {
+    public int[] findRedundantConnection(int[][] edges) {
+        int[] parent = new int[10001];
+        for(int i=0;i<parent.length;i++)
+            parent[i]=i;
+        for(int[] edge: edges){
+            int u =edge[0];
+            int v=edge[1];
+            if(findParent(parent,u)==findParent(parent,v)) return edge;
+            else parent[findParent(parent,v)] = findParent(parent,u);
+            
+        }
+        return new int[2];
+    }
+    
+    public int findParent(int[] parent, int v){
+        if(v!=parent[v]){
+            parent[v]=findParent(parent,parent[v]);
+        }
+        return parent[v];
+    }
+}

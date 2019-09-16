@@ -1,0 +1,28 @@
+class Solution {
+    public int maxNumberOfBalloons(String text) {
+        
+        String match ="balloon";
+        int count = 0;
+        List<Character> lis = new ArrayList<>();
+        for(int i=0;i<text.length();i++){
+            lis.add(text.charAt(i));
+        }
+        boolean flag=true;
+        while(!lis.isEmpty()){
+            for(int i=0;i<match.length();i++){
+                char ch = match.charAt(i);
+                if(!lis.contains(ch)){
+                    flag = false;
+                   break;
+                }else{
+                    lis.remove(Character.valueOf(ch));
+                }
+            }
+            if(flag==false)
+                break;
+            count++;
+        }
+        
+        return count;
+    }
+}
