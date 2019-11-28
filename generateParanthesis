@@ -1,0 +1,18 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        generateParenthesis(result,"",0,0,n);
+        return result;
+    }
+    
+    public void generateParenthesis(List<String> result,String curr, int left, int right, int total) {
+        if(curr.length() == total * 2) {
+            result.add(curr);
+            return;
+        }
+        if(left < total)
+            generateParenthesis(result,curr+"(",left+1,right,total);
+        if(right < left)
+            generateParenthesis(result,curr+")",left,right+1,total);
+    }
+    
