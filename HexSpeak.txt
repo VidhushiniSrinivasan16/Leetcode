@@ -1,0 +1,40 @@
+class Solution {
+    public String toHexspeak(String num) {
+        long n= Long.parseLong(num);
+        Character arr[] = {'A', 'B', 'C', 'D', 'E', 'F', 'I', 'O'};
+        Set<Character> validSet = new HashSet<>(Arrays.asList(arr));
+        List<Character> mySet = new ArrayList<>();
+        int i = 0; 
+        while(n!=0) 
+        {    
+            long temp  = 0;
+            temp = n % 16; 
+            char c;
+            if(temp < 10) 
+            { 
+                c= (char)(temp + 48);
+                if(c == '1')
+                    c = 'I';
+                if(c=='0')
+                    c = 'O';
+                mySet.add(c); 
+               
+            } 
+            else
+            { 
+                mySet.add((char)(temp + 55)); 
+                
+            }       
+            n = n/16; 
+        } 
+        StringBuilder sb = new StringBuilder();
+        for(char c : mySet) {
+            if (!validSet.contains(c))
+                return "ERROR";
+            else
+                sb.append(c);
+        }
+        return sb.reverse().toString();
+        
+    }
+}
