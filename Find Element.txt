@@ -1,0 +1,15 @@
+class Solution {
+    public int findSpecialInteger(int[] arr) {
+        Map<Integer,Integer> map = new HashMap<>();
+        int count = 0, max=Integer.MIN_VALUE, ans = 0;
+        for(int n : arr) {
+            count = map.getOrDefault(n,0)+1;
+            map.put(n,count);
+            if(count > max) {
+                max = count;
+                ans = n;
+            }
+        }
+        return ans;
+    }
+}
