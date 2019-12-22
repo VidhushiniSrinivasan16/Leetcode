@@ -1,0 +1,13 @@
+class Solution {
+    public int minCostToMoveChips(int[] chips) {
+        int oddCount = 0, evenCount = 0;
+        for(int chip :chips) {
+            if(chip%2 == 0) {
+                evenCount++;
+            }else{
+                oddCount++;
+            }
+        }
+        return Math.min(oddCount,evenCount);
+    }
+}
