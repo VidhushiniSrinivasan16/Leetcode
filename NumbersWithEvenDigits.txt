@@ -1,0 +1,8 @@
+class Solution {
+    public int findNumbers(int[] nums) {
+        int count = 0;
+        for(int n: nums)
+            count+=1 - Integer.toString(n).length()%2;
+        return count;
+    }
+}
