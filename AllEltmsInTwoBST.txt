@@ -1,0 +1,27 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        List<Integer> lis = new ArrayList<>();
+        dfs(root1, lis);
+        dfs(root2, lis);
+        Collections.sort(lis);
+        return lis;
+    }
+    
+    public void dfs(TreeNode r1, List<Integer> lis) {
+        if(r1==null)
+            return;
+        lis.add(r1.val);
+        dfs(r1.left,lis);
+        dfs(r1.right,lis);
+        
+    }
+}
