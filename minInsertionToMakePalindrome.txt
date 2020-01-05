@@ -1,0 +1,13 @@
+class Solution {
+    public int minInsertions(String s) {
+        int n=s.length();
+        int[][] table = new int[n][n];
+        int l,r,diff;
+        for(diff=1;diff<n;diff++){
+            for(l=0,r=diff;r<n;l++,r++) {
+                table[l][r]= (s.charAt(l)==s.charAt(r))? table[l+1][r-1]: Math.min(table[l+1][r],table[l][r-1])+1;
+            }
+        }
+        return table[0][n-1];
+    }
+}

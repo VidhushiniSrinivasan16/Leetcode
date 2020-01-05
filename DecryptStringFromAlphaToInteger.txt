@@ -1,0 +1,21 @@
+class Solution {
+    public String freqAlphabets(String s) {
+        if(s==null)
+            return null;
+        int n = s.length();
+        StringBuilder sb=new StringBuilder();
+        for(int i = 0;i<n;i++) {
+            String temp ="";
+            if(i+2<n && s.charAt(i+2)=='#') {
+                 temp= ""+s.charAt(i) + s.charAt(i+1);
+                 i+=2;
+            }else {
+                temp = ""+s.charAt(i);
+            }
+            
+            int decodedVal = 'a'+Integer.parseInt(temp)-1;
+            sb.append((char)decodedVal);
+        }
+        return sb.toString();
+    }
+}
