@@ -1,0 +1,43 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 class CustomStack \{\
+    int[] stack;\
+    int top;\
+    int size;\
+    public CustomStack(int maxSize) \{\
+        stack = new int[maxSize];    \
+        top = -1;\
+        size = maxSize;\
+    \}\
+    \
+    public void push(int x) \{     \
+        if (top >= size-1) return;\
+        stack[++top] = x;\
+    \}\
+    \
+    public int pop() \{\
+        if(top<0) return -1;\
+        int x = stack[top--];\
+        return x;\
+    \}\
+    \
+    public void increment(int k, int val) \{\
+        for(int i=0;i<k && i<size;i++) \{  \
+            \
+            stack[i] +=val;\
+        \}\
+    \}\
+\}\
+\
+/**\
+ * Your CustomStack object will be instantiated and called as such:\
+ * CustomStack obj = new CustomStack(maxSize);\
+ * obj.push(x);\
+ * int param_2 = obj.pop();\
+ * obj.increment(k,val);\
+ */}
