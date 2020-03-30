@@ -1,0 +1,26 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 class Solution \{\
+    public int numTeams(int[] rating) \{\
+        int res=0;\
+        int[] less = new int[2], greater = new int[2];\
+        for(int i=1;i<rating.length-1;i++) \{\
+            less[0]=0;less[1]=0;greater[0]=0;greater[1]=0;\
+            for(int j=0;j<rating.length;j++) \{\
+                if(rating[i]<rating[j]) \{\
+                    ++less[j>i?1:0];\
+                \}\
+                if(rating[i]>rating[j]) \{\
+                    ++greater[j>i?1:0];\
+                \}\
+            \}\
+            res+=less[0]*greater[1]+less[1]*greater[0];\
+        \}\
+        return res;\
+    \}\
+\}}
