@@ -1,0 +1,37 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 /**\
+ * Definition for a binary tree node.\
+ * public class TreeNode \{\
+ *     int val;\
+ *     TreeNode left;\
+ *     TreeNode right;\
+ *     TreeNode(int x) \{ val = x; \}\
+ * \}\
+ */\
+class Solution \{\
+    public int maxSumBST(TreeNode root) \{\
+        return postorder(root)[4];\
+    \}\
+    \
+    public int[] postorder(TreeNode root) \{\
+        if(root==null) \{\
+            return new int[]\{1,0,Integer.MAX_VALUE,Integer.MIN_VALUE,0\};\
+        \}\
+        int[] ll = postorder(root.left);\
+        int[] rr = postorder(root.right);\
+        int currMax = Math.max(ll[4],rr[4]);\
+        \
+        if(ll[0]==1 && rr[0]==1 && root.val > ll[3] && root.val < rr[2]) \{\
+            int sum = root.val+ll[1]+rr[1];\
+            return new int[]\{1,sum,ll[2]==Integer.MAX_VALUE?root.val:ll[2], rr[3]==Integer.MIN_VALUE ? root.val: rr[3], Math.max(sum,currMax)\};\
+        \}else \{\
+            return new int[] \{0,0,0,0,currMax\};\
+        \}\
+    \}\
+\}}
