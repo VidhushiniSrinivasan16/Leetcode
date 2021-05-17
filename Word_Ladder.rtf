@@ -1,0 +1,56 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 class Solution \{\
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) \{\
+        Set<String> bs = new HashSet<>();\
+        Set<String> es = new HashSet<>();\
+        Set<String> words = wordList.stream().collect(Collectors.toSet());\
+        Set<String> visited = new HashSet<>();\
+        int len=1;\
+        \
+        if(!wordList.contains(endWord)) \{\
+            return 0;\
+        \}else \{\
+            es.add(endWord);\
+        \}\
+        bs.add(beginWord);\
+        while(!bs.isEmpty() && !es.isEmpty()) \{\
+            if(bs.size()>es.size()) \{\
+                Set<String> s = bs;\
+                bs =es;\
+                es=s;\
+            \}\
+            \
+            Set<String> temp = new HashSet<>();\
+            for(String word: bs) \{\
+                char[] ch = word.toCharArray();\
+                for(int i=0;i<ch.length;i++) \{\
+                    char old = ch[i];\
+                    for(char c='a';c<='z';c++) \{\
+                        ch[i] = c;\
+                        String target = String.valueOf(ch);\
+                        \
+                        if(es.contains(target)) \{\
+                            return len+1;\
+                        \}\
+                        \
+                        if(!visited.contains(target) && words.contains(target)) \{\
+                            temp.add(target);\
+                            visited.add(target);\
+                        \}                   \
+                \}\
+                    ch[i] = old;\
+            \}\
+        \}\
+            bs = temp;\
+            System.out.println(temp);\
+            len++;\
+    \}\
+        return 0; \
+    \}\
+\}}
