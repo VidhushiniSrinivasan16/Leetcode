@@ -1,0 +1,89 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 class TreeNode \{\
+    int start;\
+    int end;\
+    int sum;\
+    TreeNode leftChild;\
+    TreeNode rightChild;\
+    public TreeNode(int start, int end, int sum) \{\
+        this.start=start;\
+        this.end=end;\
+        this.sum=sum;\
+    \}\
+    public TreeNode(int start,int end) \{\
+        this.start=start;\
+        this.end=end;\
+    \}\
+\}\
+class NumArray \{\
+    TreeNode root = null;\
+\
+    public NumArray(int[] nums) \{\
+        if (nums==null || nums.length==0)\
+            return;\
+        this.root = buildTree(nums, 0, nums.length-1);\
+    \}\
+    \
+    private TreeNode buildTree(int[] nums, int i, int j) \{\
+        if( nums==null || nums.length==0||i>j)\
+            return null;\
+        if(i==j)\
+            return new TreeNode(i,j,nums[i]);\
+        TreeNode curr = new TreeNode(i,j);\
+        int mid=i+(j-i)/2;\
+        curr.leftChild = buildTree(nums,i,mid);\
+        curr.rightChild = buildTree(nums,mid+1,j);\
+        curr.sum = curr.leftChild.sum+curr.rightChild.sum;\
+        return curr;\
+    \}\
+    \
+    public void update(int index, int val) \{\
+        updateHelper(root, index, val);\
+    \}\
+    \
+    private void updateHelper(TreeNode root, int i, int val) \{\
+        if(root==null)\
+            return;\
+        int mid = root.start+(root.end-root.start)/2;\
+        if(i<=mid) \{\
+            updateHelper(root.leftChild,i,val);\
+        \}else \{\
+            updateHelper(root.rightChild, i, val);\
+        \}\
+        if(root.start==root.end && root.start==i) \{\
+            root.sum = val;\
+            return;\
+        \}\
+        root.sum=root.leftChild.sum+root.rightChild.sum;\
+        \
+    \}\
+    \
+    public int sumRange(int left, int right) \{\
+        return sumRangeHelper(root, left, right);\
+    \}\
+    \
+    private int sumRangeHelper(TreeNode root, int i, int j) \{\
+        if(root==null || j<root.start && i>root.end ||i>j)\
+            return 0;\
+        if(i<=root.start && j>=root.end) \{\
+            return root.sum;\
+        \}\
+        int mid = root.start+(root.end-root.start)/2;\
+        int result = sumRangeHelper(root.leftChild,i,Math.min(mid,j)) +\
+            sumRangeHelper(root.rightChild,Math.max(mid+1,i),j);\
+        return result;\
+    \}\
+\}\
+\
+/**\
+ * Your NumArray object will be instantiated and called as such:\
+ * NumArray obj = new NumArray(nums);\
+ * obj.update(index,val);\
+ * int param_2 = obj.sumRange(left,right);\
+ */S}
