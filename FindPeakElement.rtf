@@ -1,0 +1,60 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Time :O(N)\
+Space :O(1)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 class Solution \{\
+    public int findPeakElement(int[] nums) \{\
+        int n=nums.length;\
+        for(int i=0;i<n-1;i++) \{\
+            if(nums[i]>nums[i+1])\
+                return i;\
+        \}\
+        return n-1;\
+    \}\
+\}\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Time :O(logN)\
+Space :O(logN)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 class Solution \{\
+    public int findPeakElement(int[] nums) \{\
+        return findPeak(nums,0,nums.length-1);\
+    \}\
+    private int findPeak(int[] nums,int l,int r) \{\
+        if(l==r) \
+            return l;\
+        int mid = l+(r-l)/2;\
+        if(nums[mid]>nums[mid+1])\
+            return findPeak(nums,l,mid);\
+        else \
+            return findPeak(nums,mid+1,r);\
+    \}\
+\}\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Time :O(logN)\
+Space :O(1)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 class Solution \{\
+    public int findPeakElement(int[] nums) \{\
+        int n=nums.length;\
+        int start=0;\
+        int end = n-1;\
+        while(start<end) \{\
+            int mid = start+(end-start)/2;\
+            if(nums[mid]>nums[mid+1]) \{\
+                end = mid;\
+            \}else \{\
+                start=mid+1;\
+            \}\
+        \}\
+        return end;\
+    \}\
+\}}
