@@ -1,0 +1,45 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 class Solution \{\
+    int M=1000000007;\
+    public int numDecodings(String s) \{\
+        Long[] memo = new Long[s.length()];\
+        return (int)ways(s,s.length()-1,memo);\
+    \}\
+    \
+    private long ways(String s, int i, Long[] memo) \{\
+        if(i<0)\
+            return 1;\
+        if(memo[i]!=null) \{\
+            return memo[i];\
+        \}\
+        if(s.charAt(i) == '*') \{\
+            long res = 9*ways(s,i-1,memo)%M;\
+            if(i>0 && s.charAt(i-1)=='1') \{\
+                res=(res+9*ways(s,i-2,memo))%M;\
+            \}else if(i>0 && s.charAt(i-1)=='2') \{\
+               res=(res+6*ways(s,i-2,memo))%M; \
+            \}else if(i>0 && s.charAt(i-1)=='*') \{\
+               res=(res+15*ways(s,i-2,memo))%M; \
+            \} \
+            memo[i]=res;\
+            return memo[i];\
+        \}\
+        long res = s.charAt(i) != '0' ? ways(s,i-1,memo)%M:0;\
+         if(i>0 && s.charAt(i-1)=='1') \{\
+                res=(res+ways(s,i-2,memo))%M;\
+            \}else if(i>0 && s.charAt(i-1)=='2' && s.charAt(i)<='6') \{\
+               res=(res+ways(s,i-2,memo))%M; \
+            \}else if(i>0 && s.charAt(i-1)=='*') \{\
+               res= (res+(s.charAt(i) <='6' ? 2: 1) * ways(s,i-2,memo))%M; \
+            \} \
+            memo[i]=res;\
+            return memo[i];\
+        \
+    \}\
+\}}
