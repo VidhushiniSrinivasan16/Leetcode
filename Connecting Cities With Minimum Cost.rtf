@@ -1,0 +1,68 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 class DisJointSet \{\
+    int[] parents;\
+    int[] weights;\
+    \
+    public void Union(int a,int b) \{\
+        int rootA=Find(a);\
+        int rootB=Find(b);\
+        if(rootA==rootB)\
+            return;\
+        if(this.weights[rootA]>this.weights[rootB]) \{\
+            this.parents[rootB]=rootA;\
+            this.weights[rootA]+=this.weights[rootB];\
+        \}else \{\
+            this.parents[rootA]=rootB;\
+            this.weights[rootB]+=this.weights[rootA];\
+        \}\
+    \}\
+    \
+    public int Find(int a) \{\
+        while(a!=this.parents[a]) \{\
+            this.parents[a]=this.parents[parents[a]];\
+            a=this.parents[a];\
+        \}\
+        return a;\
+    \}\
+    \
+    public boolean isInSameGroup(int a,int b) \{\
+        return Find(a) == Find(b);\
+    \}\
+    \
+    public DisJointSet(int N) \{\
+        this.parents= new int[N+1];\
+        this.weights=new int[N+1];\
+        for(int i=1;i<=N;i++) \{\
+            this.parents[i]=i;\
+            this.weights[i]=1;\
+        \}\
+    \}\
+\}\
+\
+class Solution \{\
+    public int minimumCost(int n, int[][] connections) \{\
+        DisJointSet disJointSet= new DisJointSet(n);\
+        Arrays.sort(connections,(a,b)->a[2]-b[2]);\
+        int cost=0;\
+        int total=0;\
+        for(int i=0;i<connections.length;i++) \{\
+            int a = connections[i][0];\
+            int b=connections[i][1];\
+            \
+            if(disJointSet.isInSameGroup(a,b))\
+                continue;\
+            disJointSet.Union(a,b);\
+            cost+=connections[i][2];\
+            total++;\
+        \}\
+        if(total==n-1)\
+            return cost;\
+        return -1;\
+    \}\
+\}}
