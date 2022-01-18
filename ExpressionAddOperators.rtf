@@ -1,0 +1,31 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 class Solution \{\
+    public List<String> addOperators(String num, int target) \{\
+        List<String> res = new ArrayList<>();\
+        dfs(num,"",target,0,0,0,res);\
+        return res;\
+    \}\
+    private void dfs(String num, String path, int target,int pos,long eval,long mult,List<String> res) \{\
+        if(pos==num.length()) \{\
+            if(eval==target)\
+                res.add(path);\
+        \}\
+        for(int i=pos;i<num.length();i++) \{\
+            if(i!=pos && num.charAt(pos)=='0') break;\
+            long cur = Long.parseLong(num.substring(pos,i+1));\
+            if(pos==0) \{\
+                dfs(num,path+cur,target,i+1,cur,cur,res);\
+            \}else \{\
+                dfs(num,path+"+"+cur,target,i+1,eval+cur,+cur,res);\
+                dfs(num,path+"-"+cur,target,i+1,eval-cur,-cur,res);\
+                dfs(num,path+"*"+cur,target,i+1,eval-mult+mult*cur,mult*cur,res);\
+            \}\
+        \}\
+    \}\
+\}}
