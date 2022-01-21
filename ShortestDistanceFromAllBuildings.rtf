@@ -1,0 +1,82 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 class Solution \{\
+    int[][] dirs = \{\{0,1\},\{1,0\},\{-1,0\},\{0,-1\}\};\
+    public int shortestDistance(int[][] grid) \{\
+        if(grid==null||grid.length==0||grid[0].length==0)\
+            return -1;\
+        int m=grid.length;\
+        int n=grid[0].length;\
+        int totalHouses=0;\
+        \
+        for(int i=0;i<m;i++) \{\
+            for(int j=0;j<n;j++) \{\
+                if(grid[i][j]==1) \{\
+                    totalHouses++;\
+                \}\
+            \}\
+        \}\
+        \
+        int minDist = Integer.MAX_VALUE;\
+        for(int i=0;i<m;i++) \{\
+            for(int j=0;j<n;j++) \{\
+                if(grid[i][j]==0) \{\
+                    minDist=Math.min(minDist,bfs(grid,i,j,m,n,totalHouses));\
+                \}\
+            \}\
+        \}\
+        \
+        return minDist==Integer.MAX_VALUE?-1:minDist;\
+    \}\
+    \
+    private int bfs(int[][] grid, int i, int j,int m,int n,int total) \{\
+        Queue<int[]> q = new ArrayDeque<>();\
+        int distSum=0;\
+        q.offer(new int[]\{i,j\});\
+        boolean[][] visited = new boolean[m][n];\
+        visited[i][j]=true;\
+        int currHouses=0;\
+        int steps=0;\
+        while(!q.isEmpty() && currHouses!=total) \{\
+            int size=q.size();\
+            for(int k=0;k<size;k++) \{\
+                int[] coord = q.poll();\
+                int x = coord[0];\
+                int y= coord[1];\
+                \
+                if(grid[x][y]==1) \{\
+                    distSum+=steps;\
+                    currHouses++;\
+                    continue;\
+                \}\
+                \
+                for(int[] dir: dirs) \{\
+                    int newX=x+dir[0];\
+                    int newY=y+dir[1];\
+                    if(newX<0||newY<0||newX>=m||newY>=n||grid[newX][newY]==2||visited[newX][newY])\
+                        continue;\
+                    q.offer(new int[]\{newX,newY\});\
+                    visited[newX][newY]=true;\
+                \}\
+            \}\
+            steps++;\
+        \}\
+        \
+        if(currHouses != total) \{\
+            for(int k=0;k<m;k++) \{\
+                for(int l=0;l<n;l++) \{\
+                    if(grid[k][l]==0 && visited[k][l]) \{\
+                        grid[k][l]=2;\
+                    \}\
+                \}\
+            \}\
+            return Integer.MAX_VALUE;\
+        \}\
+        return distSum;\
+    \}\
+\}}
